@@ -1,0 +1,54 @@
+17:29:03 **** Incremental Build of configuration Debug for project Cloud ****
+make all 
+Building file: ../Cloud_main.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Cloud_main.d" -MT"Cloud_main.d" -o "Cloud_main.o" "../Cloud_main.cpp"
+../Cloud_main.cpp: In function ‘int SuscriberInformationChoicesAction(int*, char*, int*)’:
+../Cloud_main.cpp:147:33: warning: variable ‘pipstr’ set but not used [-Wunused-but-set-variable]
+../Cloud_main.cpp:148:27: warning: variable ‘ptemp’ set but not used [-Wunused-but-set-variable]
+Finished building: ../Cloud_main.cpp
+ 
+Building target: Cloud
+Invoking: GCC C++ Linker
+g++  -o "Cloud"  ./Cloud_main.o   
+Finished building target: Cloud
+ 
+17:29:09 **** Incremental Build of configuration Debug for project ClientTest ****
+make all 
+make: Nothing to be done for `all'.
+17:29:10 **** Incremental Build of configuration Debug for project Cloud ****
+make all 
+make: Nothing to be done for `all'.
+17:29:10 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
+make all 
+Building file: ../fog.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"fog.d" -MT"fog.d" -o "fog.o" "../fog.cpp"
+../fog.cpp: In function ‘int RetrieveFogInfo(char*)’:
+../fog.cpp:77:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp: In function ‘int SelectFogs(int*, char*)’:
+../fog.cpp:114:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp: In function ‘int main()’:
+../fog.cpp:431:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+Finished building: ../fog.cpp
+ 
+Building target: ECE640
+Invoking: GCC C++ Linker
+g++  -o "ECE640"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./fog.o ./test1.o   
+Finished building target: ECE640
+ 
+17:29:11 **** Incremental Build of configuration Debug for project ECE640Client ****
+make all 
+make: Nothing to be done for `all'.
+17:29:12 **** Incremental Build of configuration Debug for project ClientTest ****
+make all 
+make: Nothing to be done for `all'.
+17:29:12 **** Incremental Build of configuration Debug for project Cloud ****
+make all 
+make: Nothing to be done for `all'.
+17:29:12 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
+make all 
+make: Nothing to be done for `all'.
+17:29:13 **** Incremental Build of configuration Debug for project ECE640Client ****
+make all 
+make: Nothing to be done for `all'.

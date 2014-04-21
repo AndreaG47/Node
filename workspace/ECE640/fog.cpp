@@ -6,27 +6,47 @@
  */
 
 #include "common.h"
+#define G
 
+#ifdef G
+#define CLOUDIP 		"192.168.1.2"
 #define CLOUDSERVERPORT "5005"
-#define CLOUDIP "localhost"
-#define FOGSERVERPORT "6006"
-#define FOGSERVERPORT2 "7007"
+#define NAME "G" //Name of the Fog device
+#define DATACONTENT "FOG-G" // Mask showing the data content
+#define IP "192.168.1.1"	//IP so other FOGs can connect to it
+#define FOGLISTENINGPORT 6000 //FOGSERVERPORT ad FOGLISTENINGPORT have to be the same
+#define FOGSERVERPORT "6000"
+#define FOGSERVERPORT2 "7000"
+
+#endif
+#ifdef N
+#define CLOUDIP 		"192.168.2.2"
+#define CLOUDSERVERPORT "5005"
+#define NAME "N" //Name of the Fog device
+#define DATACONTENT "FOG-N" // Mask showing the data content
+#define IP "192.168.2.1"	//IP so other FOGs can connect to it
+#define FOGLISTENINGPORT 6000 //FOGSERVERPORT ad FOGLISTENINGPORT have to be the same
+#define FOGSERVERPORT "6000"
+#define FOGSERVERPORT2 "7000"
+#endif
+
+#ifdef M
+#define CLOUDIP 		"192.168.3.2"
+#define CLOUDSERVERPORT "5005"
+#define NAME "M" //Name of the Fog device
+#define DATACONTENT "FOG-M" // Mask showing the data content
+#define IP "192.168.3.1"	//IP so other FOGs can connect to it
+#define FOGLISTENINGPORT 6000 //FOGSERVERPORT ad FOGLISTENINGPORT have to be the same
+#define FOGSERVERPORT "6000"
+#define FOGSERVERPORT2 "7000"
+#endif
 
 #define FOGRATE		1 //minutes
 #define CLOUDRATE	2 //minutes
 #define WAITTIME  1
 #define TEST
 
-//--Define parameters for specific machine
-
-#define NAME "X"
-#define DATACONTENT "FOG1ABC"
-#define IP "192.168.1.100"
-#define FOGLISTENINGPORT 6000
-
-//-----------
 using namespace std;
-
 
 struct FogDatabase{
 	char ip[INET6_ADDRSTRLEN];
@@ -35,9 +55,8 @@ struct FogDatabase{
 	char name[1];
 	int listeningport;
 } example;
+
 vector<struct FogDatabase> Database;
-
-
 
 int RequestInformationfromotherFogs(int* Cloudfd){
 	DEBUG_PRINTF("RequestInformationfromotherFogs: Start\n");
@@ -226,7 +245,7 @@ int main(void)
 {
 	DEBUG_PRINTF("Main:Start\n");
 
-	int Cloudfd, sockfd, new_fd, fogfd;
+	int Cloudfd, sockfd, fogfd;
 	char port[]=CLOUDSERVERPORT;
 	char port2[]=FOGSERVERPORT;
 	char port3[]=FOGSERVERPORT2;
@@ -234,21 +253,18 @@ int main(void)
 
 
 	//Start communication with Cloud
+	DEBUG_PRINTF("Main: Start communication with Cloud\n");
 	ClientConnectionInit(&Cloudfd,CloudIP,port);
-#ifndef TEST
-	Cloudfd=0;
-#endif
-
 	SendNewFogConnectionInfo(&Cloudfd);
 
 
 	//Start server for nodes to connect to it
-//	ServerConnectionInit(&sockfd,port2);
-	sockfd=0;
+	DEBUG_PRINTF("Main: Start server for nodes\n");
+	ServerConnectionInit(&sockfd,port2);
 
 	//Start server for other fogs to connect to it
-	//ServerConnectionInit(&fogfd, port3);
-	fogfd=0;
+	DEBUG_PRINTF("Main: Start server for other fogs\n");
+	ServerConnectionInit(&fogfd, port3);
 
 	bool ConnectionRequest = false;
 	struct timeval tv;
@@ -271,14 +287,8 @@ int main(void)
 	fd_list.push_back(sockfd);
 	fdfog_list.push_back(fogfd);
 
-	//TODO: I think this can be deleted
-	struct sockaddr_storage their_addr; // connector's address information
-	socklen_t sin_size;
-	sin_size = sizeof their_addr;
-	char s[INET6_ADDRSTRLEN];
-//
 	char buf[MAXDATASIZE];
-	int numbytes,i, max_fd, max_fdfog;
+	int numbytes, max_fd, max_fdfog, i;
 
 	struct timeval CurrentTime, StartTime, CloudTime, FogTime;
 	gettimeofday(&CurrentTime,NULL);
@@ -410,7 +420,7 @@ int main(void)
 			}
 		}
 
-#ifndef TEST
+#ifdef TEST
 		//Fogs
 
 		if (FD_ISSET(fogfd,&fdsfog)){  //Node accept new connections

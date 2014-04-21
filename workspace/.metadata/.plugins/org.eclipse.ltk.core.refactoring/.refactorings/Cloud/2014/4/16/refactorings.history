@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Cloud/server&apos; to &apos;server.cpp&apos;" description="Rename resource &apos;server&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="server" name="server.cpp" stamp="1397522009255" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;Cloud/fog.cpp&apos; to &apos;Cloud_main.cpp&apos;" description="Rename resource &apos;fog.cpp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="fog.cpp" name="Cloud_main.cpp" stamp="1397522694685" updateReferences="true"/>
+</session>

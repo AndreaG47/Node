@@ -9,7 +9,6 @@
 #include "/home/andrea/workspace/ECE640/common.h"
 
 #define CLOUDSERVERPORT "5005"
-#define CLOUDCLIENTPORT "5006"
 
 #define FOGNAMELENGTH 8
 #define SIZEDATACONTENT 8
@@ -225,16 +224,16 @@ int main(void)
 {
 
 	//
-	struct FogDatabase temp2;
-	memset(&temp2,0, sizeof(temp2));
-	char name[]="Z";
-	memcpy(temp2.name,name,sizeof(name));
-	char ip[]="192.168.2.23";
-	memcpy(temp2.ip,ip,12);
-	temp2.listeningport=5005;
-	char content[]="HOLA";
-	memcpy(temp2.datacontent,content,4);
-	Database.push_back(temp2);
+//	struct FogDatabase temp2;
+//	memset(&temp2,0, sizeof(temp2));
+//	char name[]="Z";
+//	memcpy(temp2.name,name,sizeof(name));
+//	char ip[]="192.168.2.23";
+//	memcpy(temp2.ip,ip,12);
+//	temp2.listeningport=;
+//	char content[]="HOLA";
+//	memcpy(temp2.datacontent,content,4);
+//	Database.push_back(temp2);
 	//
 
 	int sockfd, new_fd;
