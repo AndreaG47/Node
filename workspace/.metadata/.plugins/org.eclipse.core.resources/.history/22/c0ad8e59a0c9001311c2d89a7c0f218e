@@ -17,11 +17,8 @@
 
 #include <inttypes.h>
 
-#define G
-#ifdef G
 #define PORT "6000" // the port client will be connecting to
-#define IPFOG "10.10.1.2"
-#endif
+
 #define TEST
 
 #define MAXDATASIZE 100 // max number of bytes we can get at once 
@@ -115,12 +112,18 @@ int main(int argc, char *argv[])
 
 	//------------------
 
+	DEBUG_PRINTF("MAIN: Parse parameters\n");
+	if (argc != 2) {
+	    fprintf(stderr,"usage: client hostname\n");
+	    exit(1);
+	}
+
 	memset(&hints, 0, sizeof hints);
 	hints.ai_family = AF_UNSPEC;
 	hints.ai_socktype = SOCK_STREAM;
 
 	DEBUG_PRINTF("MAIN: getaddrinfo\n");
-	if ((rv = getaddrinfo(IPFOG, PORT, &hints, &servinfo)) != 0) {
+	if ((rv = getaddrinfo(argv[1], PORT, &hints, &servinfo)) != 0) {
 		fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
 		return 1;
 	}
@@ -156,12 +159,13 @@ int main(int argc, char *argv[])
 
 
 	//
-//	char PublisherPacket[MAXPUBLISHERPACKETSIZE];
-//	CreatePublisherPacket(PublisherPacket);
-//
-//
-//	if (send(sockfd,PublisherPacket,sizeof(PublisherPacket), 0) == -1)
-//		perror("send");
+	char PublisherPacket[MAXPUBLISHERPACKETSIZE];
+	CreatePublisherPacket(PublisherPacket);
+
+
+	if (send(sockfd,PublisherPacket,sizeof(PublisherPacket), 0) == -1)
+		perror("send");
+
 	//
 
 	while(1)

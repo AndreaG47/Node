@@ -1,6 +1,6 @@
-17:29:12 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
+18:10:23 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
 make all 
 make: Nothing to be done for `all'.
 
-17:29:12 Build Finished (took 103ms)
+18:10:23 Build Finished (took 88ms)
 

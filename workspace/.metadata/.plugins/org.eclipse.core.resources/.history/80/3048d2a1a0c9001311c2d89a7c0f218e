@@ -20,7 +20,7 @@
 #define G
 #ifdef G
 #define PORT "6000" // the port client will be connecting to
-#define IPFOG "10.10.1.2"
+#define IPFOG "10.10."
 #endif
 #define TEST
 
@@ -156,12 +156,13 @@ int main(int argc, char *argv[])
 
 
 	//
-//	char PublisherPacket[MAXPUBLISHERPACKETSIZE];
-//	CreatePublisherPacket(PublisherPacket);
-//
-//
-//	if (send(sockfd,PublisherPacket,sizeof(PublisherPacket), 0) == -1)
-//		perror("send");
+	char PublisherPacket[MAXPUBLISHERPACKETSIZE];
+	CreatePublisherPacket(PublisherPacket);
+
+
+	if (send(sockfd,PublisherPacket,sizeof(PublisherPacket), 0) == -1)
+		perror("send");
+
 	//
 
 	while(1)

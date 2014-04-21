@@ -15,8 +15,8 @@
 #define DATACONTENT "FOG-G" // Mask showing the data content
 #define IP "192.168.1.1"	//IP so other FOGs can connect to it
 #define FOGLISTENINGPORT 6000 //FOGSERVERPORT ad FOGLISTENINGPORT have to be the same
-#define FOGSERVERPORT "6000" //For node connections
-#define FOGSERVERPORT2 "7000" //For fog connections
+#define FOGSERVERPORT "6000"
+#define FOGSERVERPORT2 "7000"
 
 #endif
 #ifdef N
