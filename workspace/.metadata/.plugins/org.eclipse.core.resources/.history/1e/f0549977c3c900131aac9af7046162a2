@@ -391,15 +391,15 @@ int main(void)
 
 				switch(buf[0])
 				{
-//				case 'A':
-//					CaseA(&Cloudfd,buf,&numbytes);
-//					break;
-//				case 'B':
-//					CaseB(&Cloudfd,buf,&numbytes);
-//					break;
-//				case 'C':
-//					CaseC(&Cloudfd,buf,&numbytes);
-//					break;
+				case 'A':
+					CaseA(&Cloudfd,buf,&numbytes);
+					break;
+				case 'B':
+					CaseB(&Cloudfd,buf,&numbytes);
+					break;
+				case 'C':
+					CaseC(&Cloudfd,buf,&numbytes);
+					break;
 				case 'D':
 					switch (buf[1]) {
 					case 'A': //Receive from cloud list of available fogs to retrieve info
@@ -418,6 +418,8 @@ int main(void)
 				default:
 					DEBUG_PRINTF("Packet doesn't match with the standard cases\n");
 				}
+
+
 			}
 		}
 
@@ -455,15 +457,15 @@ int main(void)
 					//
 					switch(buf[0])
 					{
-//					case 'A':
-//						//CaseA(&fd_list[i],buf,&numbytes);
-//						break;
-//					case 'B':
-//						//CaseB(&fd_list[i],buf,&numbytes);
-//						break;
-//					case 'C':
-//						//CaseC(&fd_list[i],buf,&numbytes);
-//						break;
+					case 'A':
+						//CaseA(&fd_list[i],buf,&numbytes);
+						break;
+					case 'B':
+						//CaseB(&fd_list[i],buf,&numbytes);
+						break;
+					case 'C':
+						//CaseC(&fd_list[i],buf,&numbytes);
+						break;
 					default:
 						DEBUG_PRINTF("Packet doesn't match with the standard cases\n");
 					}

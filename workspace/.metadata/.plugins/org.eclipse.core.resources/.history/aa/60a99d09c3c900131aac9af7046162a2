@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
 
 	//---Temporarily hardcoded, but it can be change to the input file or parameters
 
-	A.length=90;
+	A.length=99;
 	A.rate= 2;
 
 	B.length=25;

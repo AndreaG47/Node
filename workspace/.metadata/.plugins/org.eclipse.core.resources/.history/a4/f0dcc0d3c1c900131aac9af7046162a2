@@ -61,12 +61,12 @@
 
  int CaseA(int* socket, char buf[], int *numbytes){
 //TODO:HEre.
-	 DEBUG_PRINTF4("CaseA: Socket %d received %d bytes: '%s'\n",*socket,*numbytes,buf);
+	 DEBUG_PRINTF4("Case A: Socket %d received %d bytes: '%s'\n",*socket,*numbytes,buf);
 
 	 if (send(*socket,buf,*numbytes,0)==-1){
 	 		 perror("SubscriberInformationRequestAction: send");
 	 	 }
-	 DEBUG_PRINTF4("CaseA: Socket %d SEND %d bytes: '%s'\n",*socket,*numbytes,buf);
+	 DEBUG_PRINTF4("Case A: Socket %d SEND %d bytes: '%s'\n",*socket,*numbytes,buf);
 
 	return 0;
 }

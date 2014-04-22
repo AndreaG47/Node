@@ -418,6 +418,8 @@ int main(void)
 				default:
 					DEBUG_PRINTF("Packet doesn't match with the standard cases\n");
 				}
+
+
 			}
 		}
 
