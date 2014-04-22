@@ -113,3 +113,126 @@ Invoking: GCC C++ Linker
 g++  -o "ECE640Client"  ./client.o   
 Finished building target: ECE640Client
  
+18:44:23 **** Incremental Build of configuration Debug for project ClientTest ****
+make all 
+make: Nothing to be done for `all'.
+18:44:23 **** Incremental Build of configuration Debug for project Cloud ****
+make all 
+make: Nothing to be done for `all'.
+18:44:23 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
+make all 
+Building file: ../fog.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"fog.d" -MT"fog.d" -o "fog.o" "../fog.cpp"
+../fog.cpp: In function ‘int RetrieveFogInfo(char*)’:
+../fog.cpp:77:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp: In function ‘int SelectFogs(int*, char*)’:
+../fog.cpp:114:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp: In function ‘int main()’:
+../fog.cpp:334:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:338:21: error: ‘new_fd’ was not declared in this scope
+../fog.cpp:432:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+make: *** [fog.o] Error 1
+18:44:24 **** Incremental Build of configuration Debug for project ECE640Client ****
+make all 
+Building file: ../client.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"client.d" -MT"client.d" -o "client.o" "../client.c"
+Finished building: ../client.c
+ 
+Building target: ECE640Client
+Invoking: GCC C++ Linker
+g++  -o "ECE640Client"  ./client.o   
+Finished building target: ECE640Client
+ 
+18:44:44 **** Incremental Build of configuration Debug for project ClientTest ****
+make all 
+make: Nothing to be done for `all'.
+18:44:44 **** Incremental Build of configuration Debug for project Cloud ****
+make all 
+make: Nothing to be done for `all'.
+18:44:45 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
+make all 
+Building file: ../fog.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"fog.d" -MT"fog.d" -o "fog.o" "../fog.cpp"
+../fog.cpp: In function ‘int RetrieveFogInfo(char*)’:
+../fog.cpp:77:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp: In function ‘int SelectFogs(int*, char*)’:
+../fog.cpp:114:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp: In function ‘int main()’:
+../fog.cpp:334:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:432:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:338:50: warning: ‘new_fd’ may be used uninitialized in this function [-Wuninitialized]
+Finished building: ../fog.cpp
+ 
+Building target: ECE640
+Invoking: GCC C++ Linker
+g++  -o "ECE640"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./fog.o ./test1.o   
+Finished building target: ECE640
+ 
+18:44:46 **** Incremental Build of configuration Debug for project ECE640Client ****
+make all 
+make: Nothing to be done for `all'.
+21:22:51 **** Incremental Build of configuration Debug for project ClientTest ****
+make all 
+make: Nothing to be done for `all'.
+21:22:51 **** Incremental Build of configuration Debug for project Cloud ****
+make all 
+make: Nothing to be done for `all'.
+21:22:52 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
+make all 
+Building file: ../fog.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"fog.d" -MT"fog.d" -o "fog.o" "../fog.cpp"
+../fog.cpp: In function ‘int RetrieveFogInfo(char*)’:
+../fog.cpp:77:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp: In function ‘int SelectFogs(int*, char*)’:
+../fog.cpp:114:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp: In function ‘int main()’:
+../fog.cpp:334:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:434:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:338:50: warning: ‘new_fd’ may be used uninitialized in this function [-Wuninitialized]
+Finished building: ../fog.cpp
+ 
+Building target: ECE640
+Invoking: GCC C++ Linker
+g++  -o "ECE640"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./fog.o ./test1.o   
+Finished building target: ECE640
+ 
+21:22:53 **** Incremental Build of configuration Debug for project ECE640Client ****
+make all 
+Building file: ../client.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"client.d" -MT"client.d" -o "client.o" "../client.c"
+Finished building: ../client.c
+ 
+Building target: ECE640Client
+Invoking: GCC C++ Linker
+g++  -o "ECE640Client"  ./client.o   
+Finished building target: ECE640Client
+ 
+21:22:56 **** Incremental Build of configuration Debug for project ClientTest ****
+make all 
+make: Nothing to be done for `all'.
+21:22:57 **** Incremental Build of configuration Debug for project Cloud ****
+make all 
+make: Nothing to be done for `all'.
+21:22:57 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
+make all 
+make: Nothing to be done for `all'.
+21:22:57 **** Incremental Build of configuration Debug for project ECE640Client ****
+make all 
+make: Nothing to be done for `all'.
+21:23:01 **** Incremental Build of configuration Debug for project ClientTest ****
+make all 
+make: Nothing to be done for `all'.
+21:23:01 **** Incremental Build of configuration Debug for project Cloud ****
+make all 
+make: Nothing to be done for `all'.
+21:23:01 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
+make all 
+make: Nothing to be done for `all'.
+21:23:01 **** Incremental Build of configuration Debug for project ECE640Client ****
+make all 
+make: Nothing to be done for `all'.

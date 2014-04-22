@@ -2,29 +2,31 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="291" key="DIALOG_WIDTH"/>
-		<item value="119" key="DIALOG_Y_ORIGIN"/>
+		<item value="166" key="DIALOG_Y_ORIGIN"/>
+		<item value="770" key="DIALOG_X_ORIGIN"/>
 		<item value="433" key="DIALOG_HEIGHT"/>
-		<item value="7" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="portint" key="selection"/>
+		<item value="Inside if" key="selection"/>
 		<list key="findhistory">
-			<item value="portin"/>
-			<item value="portint"/>
-			<item value="port"/>
-			<item value="GetIPaddress"/>
-			<item value="SuscriberInformationChoicesAction"/>
-			<item value="SelectFogs"/>
-			<item value="CreateFogDatabasePacket"/>
-			<item value="Start"/>
+			<item value="inside if"/>
+			<item value="accept if"/>
+			<item value="onnecting"/>
+			<item value="Connecting"/>
+			<item value="CLOUDCLIENTPORT"/>
+			<item value="their_addr"/>
+			<item value="FOGSERVERPORT"/>
+			<item value="IP"/>
 		</list>
 		<list key="replacehistory">
+			<item value="FOGLISTENINGPORT"/>
+			<item value="FOGSERVERPORT"/>
 			<item value="fdfog_list"/>
 			<item value="IncomingNewConnection"/>
 			<item value="*sockfd"/>

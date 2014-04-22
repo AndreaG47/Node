@@ -194,7 +194,7 @@
 
  	inet_ntop(p->ai_family, get_in_addr((struct sockaddr *)p->ai_addr),
  			s, sizeof s);
- 	DEBUG_PRINTF3("ClientConnectionInit: connecting to ip %s in port %s\n", s,port );
+ 	printf("ClientConnectionInit: connecting to ip %s in port %s\n", s,port );
 
  	freeaddrinfo(servinfo); // all done with this structure
  	DEBUG_PRINTF("ClientConnectionInit: End\n");

@@ -245,7 +245,7 @@ int main(void)
 {
 	DEBUG_PRINTF("Main:Start\n");
 
-	int Cloudfd, sockfd, fogfd, new_fd;
+	int Cloudfd, sockfd, fogfd;
 	char port[]=CLOUDSERVERPORT;
 	char port2[]=FOGSERVERPORT;
 	char port3[]=FOGSERVERPORT2;
@@ -324,10 +324,9 @@ int main(void)
 		select(Cloudfd+1,&fdscloud,NULL,NULL,&tv);
 
 		//Nodes
-#ifndef test
+#ifdef test
 		if (FD_ISSET(sockfd,&fds)){  //Node accept new connections
 
-			DEBUG_PRINTF("Main: New Node incoming connection\n");
 			IncomingNewConnection(&sockfd,&fds_back,&fd_list);
 		}
 
@@ -418,8 +417,6 @@ int main(void)
 				default:
 					DEBUG_PRINTF("Packet doesn't match with the standard cases\n");
 				}
-
-
 			}
 		}
 

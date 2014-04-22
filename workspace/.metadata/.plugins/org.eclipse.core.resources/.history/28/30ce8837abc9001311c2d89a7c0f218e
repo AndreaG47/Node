@@ -150,7 +150,7 @@ int main(int argc, char *argv[])
 
 	inet_ntop(p->ai_family, get_in_addr((struct sockaddr *)p->ai_addr),
 			s, sizeof s);
-	printf("ClientConnectionInit: connecting to ip %s in port %s\n", s,PORT);
+	printf("client: connecting to %s\n", s);
 
 	freeaddrinfo(servinfo); // all done with this structure
 
@@ -189,7 +189,7 @@ int main(int argc, char *argv[])
 
 		//TODO: Do the multiple packet send with the header.
 
-
+#ifdef TEST
 		gettimeofday(&CurrentTime,NULL);
 		if((TimeElapsed(&CurrentTime, &(A.tv)))>PACKETPERIOD_A){
 			memcpy(PacketBuffer,"A",1);
@@ -212,7 +212,7 @@ int main(int argc, char *argv[])
 			DEBUG_PRINTF("MAIN: Packet C sent\n");
 			C.tv=CurrentTime;
 		}
-
+#endif
 
 	}
 
