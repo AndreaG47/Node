@@ -1,6 +1,36 @@
-21:23:01 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
+19:37:44 **** Build of configuration Debug_with_Linux GCC for project ECE640 ****
 make all 
-make: Nothing to be done for `all'.
+Building file: ../.metadata/.plugins/org.eclipse.cdt.make.core/specs.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF".metadata/.plugins/org.eclipse.cdt.make.core/specs.d" -MT".metadata/.plugins/org.eclipse.cdt.make.core/specs.d" -o ".metadata/.plugins/org.eclipse.cdt.make.core/specs.o" "../.metadata/.plugins/org.eclipse.cdt.make.core/specs.c"
+Finished building: ../.metadata/.plugins/org.eclipse.cdt.make.core/specs.c
+ 
+Building file: ../fog.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"fog.d" -MT"fog.d" -o "fog.o" "../fog.cpp"
+../fog.cpp: In function ‘int RetrieveFogInfo(char*)’:
+../fog.cpp:154:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp: In function ‘int SelectFogs(int*, char*)’:
+../fog.cpp:191:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp: In function ‘int main()’:
+../fog.cpp:507:47: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘uint64_t {aka long long unsigned int}’ [-Wformat]
+../fog.cpp:328:30: warning: unused variable ‘new_fd’ [-Wunused-variable]
+../fog.cpp:330:7: warning: unused variable ‘port2’ [-Wunused-variable]
+../fog.cpp:331:7: warning: unused variable ‘port3’ [-Wunused-variable]
+../fog.cpp:363:7: warning: unused variable ‘ConnectionRequest’ [-Wunused-variable]
+../fog.cpp:385:35: warning: unused variable ‘i’ [-Wunused-variable]
+Finished building: ../fog.cpp
+ 
+Building file: ../test1.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"test1.d" -MT"test1.d" -o "test1.o" "../test1.cpp"
+Finished building: ../test1.cpp
+ 
+Building target: ECE640
+Invoking: GCC C++ Linker
+g++  -o "ECE640"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./fog.o ./test1.o   
+Finished building target: ECE640
+ 
 
-21:23:01 Build Finished (took 78ms)
+19:37:46 Build Finished (took 1s.740ms)
 

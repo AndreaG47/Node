@@ -1,238 +1,37 @@
-17:29:03 **** Incremental Build of configuration Debug for project Cloud ****
-make all 
-Building file: ../Cloud_main.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Cloud_main.d" -MT"Cloud_main.d" -o "Cloud_main.o" "../Cloud_main.cpp"
-../Cloud_main.cpp: In function ‘int SuscriberInformationChoicesAction(int*, char*, int*)’:
-../Cloud_main.cpp:147:33: warning: variable ‘pipstr’ set but not used [-Wunused-but-set-variable]
-../Cloud_main.cpp:148:27: warning: variable ‘ptemp’ set but not used [-Wunused-but-set-variable]
-Finished building: ../Cloud_main.cpp
+19:37:28 **** Clean-only build of configuration Debug_with_Linux GCC for project ECE640 ****
+make clean 
+rm -rf  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./fog.o ./test1.o  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.d  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.d  ./fog.d ./test1.d  ECE640
  
-Building target: Cloud
-Invoking: GCC C++ Linker
-g++  -o "Cloud"  ./Cloud_main.o   
-Finished building target: Cloud
+19:37:44 **** Build of configuration Debug_with_Linux GCC for project ECE640 ****
+make all 
+Building file: ../.metadata/.plugins/org.eclipse.cdt.make.core/specs.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF".metadata/.plugins/org.eclipse.cdt.make.core/specs.d" -MT".metadata/.plugins/org.eclipse.cdt.make.core/specs.d" -o ".metadata/.plugins/org.eclipse.cdt.make.core/specs.o" "../.metadata/.plugins/org.eclipse.cdt.make.core/specs.c"
+Finished building: ../.metadata/.plugins/org.eclipse.cdt.make.core/specs.c
  
-17:29:09 **** Incremental Build of configuration Debug for project ClientTest ****
-make all 
-make: Nothing to be done for `all'.
-17:29:10 **** Incremental Build of configuration Debug for project Cloud ****
-make all 
-make: Nothing to be done for `all'.
-17:29:10 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
-make all 
 Building file: ../fog.cpp
 Invoking: GCC C++ Compiler
 g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"fog.d" -MT"fog.d" -o "fog.o" "../fog.cpp"
 ../fog.cpp: In function ‘int RetrieveFogInfo(char*)’:
-../fog.cpp:77:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:154:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
 ../fog.cpp: In function ‘int SelectFogs(int*, char*)’:
-../fog.cpp:114:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:191:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
 ../fog.cpp: In function ‘int main()’:
-../fog.cpp:431:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:507:47: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘uint64_t {aka long long unsigned int}’ [-Wformat]
+../fog.cpp:328:30: warning: unused variable ‘new_fd’ [-Wunused-variable]
+../fog.cpp:330:7: warning: unused variable ‘port2’ [-Wunused-variable]
+../fog.cpp:331:7: warning: unused variable ‘port3’ [-Wunused-variable]
+../fog.cpp:363:7: warning: unused variable ‘ConnectionRequest’ [-Wunused-variable]
+../fog.cpp:385:35: warning: unused variable ‘i’ [-Wunused-variable]
 Finished building: ../fog.cpp
+ 
+Building file: ../test1.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"test1.d" -MT"test1.d" -o "test1.o" "../test1.cpp"
+Finished building: ../test1.cpp
  
 Building target: ECE640
 Invoking: GCC C++ Linker
 g++  -o "ECE640"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./fog.o ./test1.o   
 Finished building target: ECE640
  
-17:29:11 **** Incremental Build of configuration Debug for project ECE640Client ****
-make all 
-make: Nothing to be done for `all'.
-17:29:12 **** Incremental Build of configuration Debug for project ClientTest ****
-make all 
-make: Nothing to be done for `all'.
-17:29:12 **** Incremental Build of configuration Debug for project Cloud ****
-make all 
-make: Nothing to be done for `all'.
-17:29:12 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
-make all 
-make: Nothing to be done for `all'.
-17:29:13 **** Incremental Build of configuration Debug for project ECE640Client ****
-make all 
-make: Nothing to be done for `all'.
-18:00:29 **** Incremental Build of configuration Debug for project ClientTest ****
-make all 
-make: Nothing to be done for `all'.
-18:00:30 **** Incremental Build of configuration Debug for project Cloud ****
-make all 
-make: Nothing to be done for `all'.
-18:00:30 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
-make all 
-Building file: ../fog.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"fog.d" -MT"fog.d" -o "fog.o" "../fog.cpp"
-../fog.cpp: In function ‘int RetrieveFogInfo(char*)’:
-../fog.cpp:77:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp: In function ‘int SelectFogs(int*, char*)’:
-../fog.cpp:114:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp: In function ‘int main()’:
-../fog.cpp:431:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-Finished building: ../fog.cpp
- 
-Building target: ECE640
-Invoking: GCC C++ Linker
-g++  -o "ECE640"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./fog.o ./test1.o   
-Finished building target: ECE640
- 
-18:00:31 **** Incremental Build of configuration Debug for project ECE640Client ****
-make all 
-Building file: ../client.c
-Invoking: GCC C Compiler
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"client.d" -MT"client.d" -o "client.o" "../client.c"
-../client.c: In function ‘main’:
-../client.c:160:2: warning: implicit declaration of function ‘CreatePublisherPacket’ [-Wimplicit-function-declaration]
-Finished building: ../client.c
- 
-Building target: ECE640Client
-Invoking: GCC C++ Linker
-g++  -o "ECE640Client"  ./client.o   
-./client.o: In function `main':
-/home/andrea/workspace/ECE640Client/Debug/../client.c:160: undefined reference to `CreatePublisherPacket'
-collect2: ld returned 1 exit status
-make: *** [ECE640Client] Error 1
-18:10:22 **** Incremental Build of configuration Debug for project ClientTest ****
-make all 
-make: Nothing to be done for `all'.
-18:10:23 **** Incremental Build of configuration Debug for project Cloud ****
-make all 
-make: Nothing to be done for `all'.
-18:10:23 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
-make all 
-make: Nothing to be done for `all'.
-18:10:23 **** Incremental Build of configuration Debug for project ECE640Client ****
-make all 
-Building file: ../client.c
-Invoking: GCC C Compiler
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"client.d" -MT"client.d" -o "client.o" "../client.c"
-Finished building: ../client.c
- 
-Building target: ECE640Client
-Invoking: GCC C++ Linker
-g++  -o "ECE640Client"  ./client.o   
-Finished building target: ECE640Client
- 
-18:44:23 **** Incremental Build of configuration Debug for project ClientTest ****
-make all 
-make: Nothing to be done for `all'.
-18:44:23 **** Incremental Build of configuration Debug for project Cloud ****
-make all 
-make: Nothing to be done for `all'.
-18:44:23 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
-make all 
-Building file: ../fog.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"fog.d" -MT"fog.d" -o "fog.o" "../fog.cpp"
-../fog.cpp: In function ‘int RetrieveFogInfo(char*)’:
-../fog.cpp:77:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp: In function ‘int SelectFogs(int*, char*)’:
-../fog.cpp:114:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp: In function ‘int main()’:
-../fog.cpp:334:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp:338:21: error: ‘new_fd’ was not declared in this scope
-../fog.cpp:432:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-make: *** [fog.o] Error 1
-18:44:24 **** Incremental Build of configuration Debug for project ECE640Client ****
-make all 
-Building file: ../client.c
-Invoking: GCC C Compiler
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"client.d" -MT"client.d" -o "client.o" "../client.c"
-Finished building: ../client.c
- 
-Building target: ECE640Client
-Invoking: GCC C++ Linker
-g++  -o "ECE640Client"  ./client.o   
-Finished building target: ECE640Client
- 
-18:44:44 **** Incremental Build of configuration Debug for project ClientTest ****
-make all 
-make: Nothing to be done for `all'.
-18:44:44 **** Incremental Build of configuration Debug for project Cloud ****
-make all 
-make: Nothing to be done for `all'.
-18:44:45 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
-make all 
-Building file: ../fog.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"fog.d" -MT"fog.d" -o "fog.o" "../fog.cpp"
-../fog.cpp: In function ‘int RetrieveFogInfo(char*)’:
-../fog.cpp:77:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp: In function ‘int SelectFogs(int*, char*)’:
-../fog.cpp:114:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp: In function ‘int main()’:
-../fog.cpp:334:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp:432:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp:338:50: warning: ‘new_fd’ may be used uninitialized in this function [-Wuninitialized]
-Finished building: ../fog.cpp
- 
-Building target: ECE640
-Invoking: GCC C++ Linker
-g++  -o "ECE640"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./fog.o ./test1.o   
-Finished building target: ECE640
- 
-18:44:46 **** Incremental Build of configuration Debug for project ECE640Client ****
-make all 
-make: Nothing to be done for `all'.
-21:22:51 **** Incremental Build of configuration Debug for project ClientTest ****
-make all 
-make: Nothing to be done for `all'.
-21:22:51 **** Incremental Build of configuration Debug for project Cloud ****
-make all 
-make: Nothing to be done for `all'.
-21:22:52 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
-make all 
-Building file: ../fog.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"fog.d" -MT"fog.d" -o "fog.o" "../fog.cpp"
-../fog.cpp: In function ‘int RetrieveFogInfo(char*)’:
-../fog.cpp:77:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp: In function ‘int SelectFogs(int*, char*)’:
-../fog.cpp:114:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp: In function ‘int main()’:
-../fog.cpp:334:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp:434:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp:338:50: warning: ‘new_fd’ may be used uninitialized in this function [-Wuninitialized]
-Finished building: ../fog.cpp
- 
-Building target: ECE640
-Invoking: GCC C++ Linker
-g++  -o "ECE640"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./fog.o ./test1.o   
-Finished building target: ECE640
- 
-21:22:53 **** Incremental Build of configuration Debug for project ECE640Client ****
-make all 
-Building file: ../client.c
-Invoking: GCC C Compiler
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"client.d" -MT"client.d" -o "client.o" "../client.c"
-Finished building: ../client.c
- 
-Building target: ECE640Client
-Invoking: GCC C++ Linker
-g++  -o "ECE640Client"  ./client.o   
-Finished building target: ECE640Client
- 
-21:22:56 **** Incremental Build of configuration Debug for project ClientTest ****
-make all 
-make: Nothing to be done for `all'.
-21:22:57 **** Incremental Build of configuration Debug for project Cloud ****
-make all 
-make: Nothing to be done for `all'.
-21:22:57 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
-make all 
-make: Nothing to be done for `all'.
-21:22:57 **** Incremental Build of configuration Debug for project ECE640Client ****
-make all 
-make: Nothing to be done for `all'.
-21:23:01 **** Incremental Build of configuration Debug for project ClientTest ****
-make all 
-make: Nothing to be done for `all'.
-21:23:01 **** Incremental Build of configuration Debug for project Cloud ****
-make all 
-make: Nothing to be done for `all'.
-21:23:01 **** Incremental Build of configuration Debug_with_Linux GCC for project ECE640 ****
-make all 
-make: Nothing to be done for `all'.
-21:23:01 **** Incremental Build of configuration Debug for project ECE640Client ****
-make all 
-make: Nothing to be done for `all'.

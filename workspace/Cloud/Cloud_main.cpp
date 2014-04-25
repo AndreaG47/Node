@@ -220,6 +220,20 @@ int ReceivedNewConnectionInfo(char buf[],vector<struct FogDatabase>* list){
 }
 
 
+int ForwardPacket(char buf[], int *fd, int *size)
+{
+	DEBUG_PRINTF("ForwardPacket: Start\n");
+	timeval now;
+	memcpy(&now,buf+1,sizeof(now));
+	printf("time = %u.%06u\n",now.tv_sec, now.tv_usec);
+
+	if(send(*fd,buf,*size,0)==-1)
+		DEBUG_PRINTF("ForwardPacket: Send error\n");
+	DEBUG_PRINTF("ForwardPacket: End\n");
+	return 0;
+}
+
+
 int main(void)
 {
 
@@ -283,8 +297,6 @@ int main(void)
 
 		if (FD_ISSET(sockfd,&fds)){
 
-			DEBUG_PRINTF("Inside if\n");
-
 			new_fd = (accept(sockfd, (struct sockaddr *)&their_addr, &sin_size));
 
 			if (new_fd == -1) {
@@ -308,7 +320,7 @@ int main(void)
 		{
 			if (FD_ISSET(fd_list[i],&fds)){
 
-				if ((numbytes = recv(new_fd, buf, MAXDATASIZE-1, 0)) == -1) {
+				if ((numbytes = recv(fd_list[i], buf, MAXDATASIZE-1, 0)) == -1) {
 					    perror("recv");
 					    //exit(1);
 					    //TODO: Remove this exits because it's causing that the server disconnects
@@ -325,15 +337,15 @@ int main(void)
 					switch(pbuf[0])
 					{
 					case 'A':
-						CaseA(&fd_list[i],buf,&numbytes);
+						ForwardPacket(buf,&fd_list[i],&numbytes);
 
 						break;
-					case 'B':
-						CaseB(&fd_list[i],buf,&numbytes);
-						break;
-					case 'C':
-						CaseC(&fd_list[i],buf,&numbytes);
-						break;
+//					case 'B':
+//						CaseB(&fd_list[i],buf,&numbytes);
+//						break;
+//					case 'C':
+//						CaseC(&fd_list[i],buf,&numbytes);
+//						break;
 					case 'D': //Receive information request from FOG
 						switch(pbuf[1])
 						{

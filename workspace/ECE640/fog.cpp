@@ -6,7 +6,24 @@
  */
 
 #include "common.h"
-#define G
+#define _STDC_FORMAT_MACROS
+#include <inttypes.h>
+
+#define FOG
+
+#define t
+
+#ifdef t
+#define CLOUDIP 		"localhost"
+#define CLOUDSERVERPORT "5005"
+#define NAME "T" //Name of the Fog device
+#define DATACONTENT "FOG-T" // Mask showing the data content
+#define IP "localhost"	//My IP, so other FOGs can connect to me
+#define FOGLISTENINGPORT 6000 //FOGSERVERPORT ad FOGLISTENINGPORT have to be the same
+#define FOGSERVERPORT "6000" //For node incoming connections
+#define FOGSERVERPORT2 "7000" //For fog incoming connections
+#endif
+
 
 #ifdef G
 #define CLOUDIP 		"192.168.1.2"
@@ -19,6 +36,7 @@
 #define FOGSERVERPORT2 "7000" //For fog connections
 
 #endif
+
 #ifdef N
 #define CLOUDIP 		"192.168.2.2"
 #define CLOUDSERVERPORT "5005"
@@ -41,10 +59,17 @@
 #define FOGSERVERPORT2 "7000"
 #endif
 
-#define FOGRATE		1 //minutes
-#define CLOUDRATE	2 //minutes
-#define WAITTIME  1
-#define TEST
+//-----Modify Packet parameters----
+
+#define PACKETPERIOD_A 4000000
+#define PACKETPERIOD_B 4000000
+#define PACKETPERIOD_C 4000000
+
+#define PACKETsize_A 50
+#define PACKETsize_B 50
+#define PACKETsize_C 50
+
+//------
 
 using namespace std;
 
@@ -57,6 +82,58 @@ struct FogDatabase{
 } example;
 
 vector<struct FogDatabase> Database;
+
+int PacketGeneration(int *sockfd,struct timeval *TimeA, struct timeval* TimeB, struct timeval*TimeC)
+{
+	struct timeval CurrentTime;
+	char PacketBuffer[MAXPACKETSIZE];
+	memset(PacketBuffer,5,MAXPACKETSIZE); //fill buffer with any data.
+
+	gettimeofday(&CurrentTime,NULL);
+	if((TimeElapsed(&CurrentTime, TimeA))>PACKETPERIOD_A){
+		memcpy(PacketBuffer,"A",1);
+		memcpy(PacketBuffer+1,&CurrentTime,sizeof(CurrentTime));
+
+		if (send(*sockfd,PacketBuffer, PACKETsize_A, 0) == -1)
+			perror("send");
+		DEBUG_PRINTF("MAIN: Packet A sent\n");
+		*TimeA=CurrentTime;
+	}
+//	if((TimeElapsed(&CurrentTime, TimeB))>PACKETPERIOD_B){
+//		memcpy(PacketBuffer,"B",1);
+//		memcpy(PacketBuffer+1,&CurrentTime,sizeof(CurrentTime));
+//		if (send(*sockfd,PacketBuffer, PACKETsize_B, 0) == -1)
+//			perror("send");
+//		DEBUG_PRINTF("MAIN: Packet B sent\n");
+//		*TimeB=CurrentTime;
+//	}
+//	if((TimeElapsed(&CurrentTime, TimeC))>PACKETPERIOD_C){
+//		memcpy(PacketBuffer,"C",1);
+//		memcpy(PacketBuffer+1,&CurrentTime,sizeof(CurrentTime));
+//		if (send(*sockfd,PacketBuffer, PACKETsize_C, 0) == -1)
+//			perror("send");
+//		DEBUG_PRINTF("MAIN: Packet C sent\n");
+//		*TimeC=CurrentTime;
+//	}
+
+	return 0;
+}
+
+int ForwardPacket(char buf[], int *fd, int *size)
+{
+	DEBUG_PRINTF("ForwardPacket: Start\n");
+	timeval now;
+	memcpy(&now,buf+1,sizeof(now));
+	DEBUG_PRINTF3("time = %u.%06u\n",now.tv_sec, now.tv_usec);
+	DEBUG_PRINTF2("ForwardPacket: Size to send= %d\n",*size);
+	int numbytes;
+	if((numbytes=send(*fd,buf,*size,0))==-1)
+		DEBUG_PRINTF("ForwardPacket: Send error\n");
+	DEBUG_PRINTF2("ForwardPacket: Size sent= %d\n",numbytes);
+
+	DEBUG_PRINTF("ForwardPacket: End\n");
+	return 0;
+}
 
 int RequestInformationfromotherFogs(int* Cloudfd){
 	DEBUG_PRINTF("RequestInformationfromotherFogs: Start\n");
@@ -243,6 +320,9 @@ int SendNewFogConnectionInfo(int* fd){
 
 int main(void)
 {
+	//freopen("Output_Fog.txt","w",stdout);
+	//freopen("Error_Fog.txt","w",stderr);
+
 	DEBUG_PRINTF("Main:Start\n");
 
 	int Cloudfd, sockfd, fogfd, new_fd;
@@ -253,18 +333,32 @@ int main(void)
 
 
 	//Start communication with Cloud
+#ifdef CLOUD
 	DEBUG_PRINTF("Main: Start communication with Cloud\n");
 	ClientConnectionInit(&Cloudfd,CloudIP,port);
 	SendNewFogConnectionInfo(&Cloudfd);
-
+#endif
+#ifndef CLOUD
+	Cloudfd=0;
+#endif
 
 	//Start server for nodes to connect to it
+#ifdef NODE
 	DEBUG_PRINTF("Main: Start server for nodes\n");
 	ServerConnectionInit(&sockfd,port2);
+#endif
+#ifndef NODE
+	sockfd=0;
+#endif
 
+#ifdef FOG
 	//Start server for other fogs to connect to it
 	DEBUG_PRINTF("Main: Start server for other fogs\n");
 	ServerConnectionInit(&fogfd, port3);
+#endif
+#ifndef FOG
+	fogfd=0;
+#endif
 
 	bool ConnectionRequest = false;
 	struct timeval tv;
@@ -296,6 +390,10 @@ int main(void)
 	CloudTime.tv_sec=CloudTime.tv_usec=0;
 	FogTime.tv_sec=FogTime.tv_usec=0;
 
+	struct timeval TimeA, TimeB, TimeC, RecvTime;
+	TimeA=TimeB=TimeC=RecvTime=CloudTime;
+	uint64_t elapsed;
+
 	//TODO:Remove this after testing
 	DEBUG_PRINTF2("Main: fd_list.back()= %d\n",fd_list.back());
 	max_fd=*max_element(fd_list.begin(),fd_list.end());
@@ -304,6 +402,8 @@ int main(void)
 	DEBUG_PRINTF2("Main: Max_fd= %d\n",max_fd);
 	DEBUG_PRINTF2("Main: Max_fdfog= %d\n",max_fdfog);
 	DEBUG_PRINTF("Main: Enter to main while loop\n");
+
+
 	//
 	while(1) {  // main accept() loop
 
@@ -324,7 +424,7 @@ int main(void)
 		select(Cloudfd+1,&fdscloud,NULL,NULL,&tv);
 
 		//Nodes
-#ifndef test
+#ifdef NODE
 		if (FD_ISSET(sockfd,&fds)){  //Node accept new connections
 
 			DEBUG_PRINTF("Main: New Node incoming connection\n");
@@ -334,8 +434,9 @@ int main(void)
 		for (i=1; i<fd_list.size();i++) { //Node existing connections
 			if (FD_ISSET(fd_list[i],&fds)){
 
+				DEBUG_PRINTF2("Main: Node existing connection: fd_list[i]=%d\n",fd_list[i]);
 				memset(buf,0,sizeof(buf));
-				numbytes = recv(new_fd, buf, MAXDATASIZE-1, 0);
+				numbytes = recv(fd_list[i], buf, MAXDATASIZE-1, 0);
 
 				if (numbytes == -1) {
 					    perror("Main: Node existing connections: recv");
@@ -357,21 +458,26 @@ int main(void)
 					switch(buf[0])
 					{
 					case 'A':
-						CaseA(&fd_list[i],buf,&numbytes);
+
+						ForwardPacket(buf,&fd_list[i],&numbytes);
 						break;
 					case 'B':
-						CaseB(&fd_list[i],buf,&numbytes);
+	//					ForwardPacket(buf,&fd_list[i],&numbytes);
+						//CaseB(&fd_list[i],buf,&numbytes);
 						break;
 					case 'C':
-						CaseC(&fd_list[i],buf,&numbytes);
+		//				ForwardPacket(buf,&fd_list[i],&numbytes);
+						//CaseC(&fd_list[i],buf,&numbytes);
 						break;
 					default:
-						DEBUG_PRINTF("Packet doesn't match with the standard cases\n");
+						DEBUG_PRINTF("Packet from Node doesn't match with the standard cases\n");
 					}
 				}
 			}
 		}
 #endif
+
+#ifdef CLOUD
 		//Cloud
 		if (FD_ISSET(Cloudfd,&fdscloud)){ //Cloud connection
 
@@ -387,13 +493,20 @@ int main(void)
 			}
 			else {
 				buf[numbytes] = '\0';
-				DEBUG_PRINTF3("Main: Cloud connections: Received %d bytes: '%s'\n",numbytes,buf);
+				DEBUG_PRINTF3("Main: Cloud incoming connections: Received %d bytes: '%s'\n",numbytes,buf);
 
 				switch(buf[0])
 				{
-//				case 'A':
-//					CaseA(&Cloudfd,buf,&numbytes);
-//					break;
+				case 'A':
+					DEBUG_PRINTF3("MAIN: Received %d bytes: '%s'\n",numbytes,buf);
+					memcpy(&RecvTime,buf+1,sizeof(RecvTime));
+					DEBUG_PRINTF3("Main: RecvTime = %u.%06u\n",RecvTime.tv_sec, RecvTime.tv_usec);
+					gettimeofday(&CurrentTime,NULL);
+					DEBUG_PRINTF3("Main: CurrentTime = %u.%06u\n",CurrentTime.tv_sec, CurrentTime.tv_usec);
+					elapsed=TimeElapsed(&CurrentTime, &RecvTime);
+					printf("Main: Elapsed : %u us\n", elapsed);
+
+					break;
 //				case 'B':
 //					CaseB(&Cloudfd,buf,&numbytes);
 //					break;
@@ -416,12 +529,14 @@ int main(void)
 					}
 					break;
 				default:
-					DEBUG_PRINTF("Packet doesn't match with the standard cases\n");
+					DEBUG_PRINTF("Main: Cloud fd: Packet doesn't match with the standard cases\n");
 				}
 			}
 		}
 
-#ifdef TEST
+#endif
+
+#ifdef FOG
 		//Fogs
 
 		if (FD_ISSET(fogfd,&fdsfog)){  //Node accept new connections
@@ -456,7 +571,7 @@ int main(void)
 					switch(buf[0])
 					{
 //					case 'A':
-//						//CaseA(&fd_list[i],buf,&numbytes);
+						//CaseA(&fd_list[i],buf,&numbytes);
 //						break;
 //					case 'B':
 //						//CaseB(&fd_list[i],buf,&numbytes);
@@ -465,12 +580,14 @@ int main(void)
 //						//CaseC(&fd_list[i],buf,&numbytes);
 //						break;
 					default:
-						DEBUG_PRINTF("Packet doesn't match with the standard cases\n");
+						DEBUG_PRINTF("Main: Fog connections: Packet doesn't match with the standard cases\n");
 					}
 				}
 			}
 		}
 #endif
+
+#ifdef CLOUDT
 
 		//Send request to Cloud to get info about other fogs
 		gettimeofday(&CurrentTime,NULL);
@@ -483,21 +600,11 @@ int main(void)
 			}
 		}
 
+#endif
 
-
-//		//Send data to Cloud
-//		gettimeofday(&CurrentTime,NULL);
-//		if((TimeElapsed(&CurrentTime, &CloudTime))>CLOUDRATE*1000000*60){
-//			SendDatatoCloud(&Cloudfd);
-//			gettimeofday(&CloudTime,NULL);
-//		}
-//
-//		//Send data to Cloud
-//		gettimeofday(&CurrentTime,NULL);
-//		if((TimeElapsed(&CurrentTime, &FogTime))>FOGRATE*1000000*60){
-//			SendDatatoFog(&fdfog_list);
-//			gettimeofday(&CloudTime,NULL);
-//		}
+#ifdef CLOUD
+		PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
+#endif
 
 	}
 

@@ -28,10 +28,14 @@
 #include <sys/time.h>
 
 
+
+
+
 #define BACKLOG 10	 // how many pending connections queue will hold
 #define MAXDATASIZE 1000
+#define MAXPACKETSIZE 1500
 
-#define DEBUG
+//#define DEBUG
 #ifdef DEBUG
 #define DEBUG_PRINTF(x)			printf(x)
 #define DEBUG_PRINTF2(x,y)		printf(x,y)

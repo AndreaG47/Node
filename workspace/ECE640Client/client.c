@@ -12,26 +12,38 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/time.h>
-
 #include <arpa/inet.h>
 
+#define _STDC_FORMAT_MACROS
 #include <inttypes.h>
 
-#define G
-#ifdef G
-#define PORT "6000" // the port client will be connecting to
-#define IPFOG "10.10.1.2"
-#endif
-#define TEST
+//-------Modify Packet Parameters----
+#define PACKETPERIOD_A 3000000
+#define PACKETPERIOD_B 100000000000
+#define PACKETPERIOD_C 500000000000
 
-#define MAXDATASIZE 100 // max number of bytes we can get at once 
+#define PACKETsize_A 999
+#define PACKETsize_B 50
+#define PACKETsize_C 50
+
+//----------------------------
+
+#define t
+#define G
+
+#ifdef G
+#define PORT "6000" // the port in the fog that node will be connecting to
+#define IPFOG "localhost" //ip of the fog
+#endif
+//#define DEBUG
+
+#define MAXDATASIZE 1500 // max number of bytes we can get at once
 #define MAXPACKETSIZE 1500
-#define PACKETPERIOD_A 2000000
-#define PACKETPERIOD_B 1000000
-#define PACKETPERIOD_C 5000000
+
 #define MAXPUBLISHERPACKETSIZE 100
 
-#define DEBUG
+//#define DEBUG
+//#define DEBUG_L2
 
 #ifdef DEBUG
 #define DEBUG_PRINTF(x)			printf(x)
@@ -41,21 +53,20 @@
 
 #ifndef DEBUG
 #define DEBUG_PRINTF(x)
-#define DEBUG_PRINTF(x,y)
-#define DEBUG_PRINTF(x,y,z)
+#define DEBUG_PRINTF2(x,y)
+#define DEBUG_PRINTF3(x,y,z)
 #endif
 
-#define DEBUG_L2
+
 #ifdef DEBUG_L2
 #define L2DEBUG_PRINTF(x)			printf(x)
 #define L2DEBUG_PRINTF2(x,y)		printf(x,y)
 #define L2DEBUG_PRINTF3(x,y,z)	printf(x,y,z)
 #endif
-
 #ifndef DEBUG_L2
 #define L2DEBUG_PRINTF(x)
-#define L2DEBUG_PRINTF(x,y)
-#define L2DEBUG_PRINTF(x,y,z)
+#define L2DEBUG_PRINTF2(x,y)
+#define L2DEBUG_PRINTF3(x,y,z)
 #endif
 
 // get sockaddr, IPv4 or IPv6:
@@ -74,46 +85,98 @@ uint64_t TimeElapsed(struct timeval* current, struct timeval* tv){
 	return a;
 }
 
+double time_diff(struct timeval x , struct timeval y)
+{
+    double x_ms , y_ms , diff;
+
+    x_ms = (double)x.tv_sec*1000000 + (double)x.tv_usec;
+    y_ms = (double)y.tv_sec*1000000 + (double)y.tv_usec;
+
+    diff = (double)y_ms - (double)x_ms;
+
+    return diff;
+}
+
 struct PacketInfo {
 	float rate; 			//packets per second
 	int length; 		//packet length
 	struct timeval tv; 	//structure to keep track of time to send
 };
 
+int PacketGeneration(int *sockfd,struct timeval *TimeA, struct timeval* TimeB, struct timeval*TimeC)
+{
+	//DEBUG_PRINTF("PacketGeneration: Start\n");
+	struct timeval CurrentTime;
+	char PacketBuffer[MAXPACKETSIZE];
+	memset(PacketBuffer,5,MAXPACKETSIZE); //fill buffer with any data.
+
+	//---Temporarily hardcoded, but it can be change to the input file or parameters
+//	A.length=PACKETsize_A;
+//	A.rate= 2;
+//
+//	B.length=PACKETsize_B;
+//	B.rate= 1;
+//
+//	C.length=PACKETsize_C;
+//	C.rate= 5;
+	//------------------
+
+	gettimeofday(&CurrentTime,NULL);
+	if((TimeElapsed(&CurrentTime, TimeA))>PACKETPERIOD_A){
+		memcpy(PacketBuffer,"A",1);
+		memcpy(PacketBuffer+1,&CurrentTime,sizeof(CurrentTime));
+
+		if (send(*sockfd,PacketBuffer, PACKETsize_A, 0) == -1)
+			perror("PacketGeneration:send");
+		DEBUG_PRINTF("PacketGeneration: Packet A sent\n");
+		*TimeA=CurrentTime;
+	}
+//	if((TimeElapsed(&CurrentTime, TimeB))>PACKETPERIOD_B){
+//		memcpy(PacketBuffer,"B",1);
+//		memcpy(PacketBuffer+1,&CurrentTime,sizeof(CurrentTime));
+//
+//		if (send(*sockfd,PacketBuffer, PACKETsize_B, 0) == -1)
+//			perror("send");
+//		DEBUG_PRINTF("PacketGeneration: Packet B sent\n");
+//		*TimeB=CurrentTime;
+//	}
+//	if((TimeElapsed(&CurrentTime, TimeC))>PACKETPERIOD_C){
+//		memcpy(PacketBuffer,"C",1);
+//		memcpy(PacketBuffer+1,&CurrentTime,sizeof(CurrentTime));
+//
+//		if (send(*sockfd,PacketBuffer, PACKETsize_C, 0) == -1)
+//			perror("PacketGeneration:send");
+//		DEBUG_PRINTF("PacketGeneration: Packet C sent\n");
+//		*TimeC=CurrentTime;
+//	}
+
+	//DEBUG_PRINTF("PacketGeneration: End\n");
+	return 0;
+}
+
 int main(int argc, char *argv[])
 {
+	//freopen("Output_Node.txt","w",stdout);
 	DEBUG_PRINTF("Main: Start\n");
 	int sockfd, numbytes;  
 	char buf[MAXDATASIZE];
 	struct addrinfo hints, *servinfo, *p;
 	int rv;
 	char s[INET6_ADDRSTRLEN];
-	char PacketBuffer[MAXPACKETSIZE];
 
-	struct timeval tv, CurrentTime;
+	struct timeval tv, CurrentTime, RecvTime, TimeA, TimeB, TimeC;
 	fd_set fds;
 	tv.tv_sec=0;
 	tv.tv_usec=0;
 	CurrentTime.tv_sec=CurrentTime.tv_usec=0;
-	struct PacketInfo A, B, C;
+	RecvTime=CurrentTime;
+	TimeA=CurrentTime;
+	TimeB=CurrentTime;
+	TimeC=CurrentTime;
+	uint64_t elapsed=0;
 
-	memset(&A,0,sizeof(A));
-	memset(&B,0,sizeof(B));
-	memset(&C,0,sizeof(C));
-	memset(PacketBuffer,5,MAXPACKETSIZE); //fill buffer with any data.
 
-	//---Temporarily hardcoded, but it can be change to the input file or parameters
-
-	A.length=90;
-	A.rate= 2;
-
-	B.length=25;
-	B.rate= 1;
-
-	C.length=75;
-	C.rate= 5;
-
-	//------------------
+	//Session init
 
 	memset(&hints, 0, sizeof hints);
 	hints.ai_family = AF_UNSPEC;
@@ -126,7 +189,7 @@ int main(int argc, char *argv[])
 	}
 
 	// loop through all the results and connect to the first we can
-	DEBUG_PRINTF("MAIN:Socket and connect\n");
+	DEBUG_PRINTF("Main:Socket and connect\n");
 	for(p = servinfo; p != NULL; p = p->ai_next) {
 		if ((sockfd = socket(p->ai_family, p->ai_socktype,
 				p->ai_protocol)) == -1) {
@@ -150,19 +213,10 @@ int main(int argc, char *argv[])
 
 	inet_ntop(p->ai_family, get_in_addr((struct sockaddr *)p->ai_addr),
 			s, sizeof s);
-	printf("ClientConnectionInit: connecting to ip %s in port %s\n", s,PORT);
+	DEBUG_PRINTF3("NodeConnectionInit: connecting to Fog (ip) %s in port %s\n", s,PORT);
 
 	freeaddrinfo(servinfo); // all done with this structure
-
-
-	//
-//	char PublisherPacket[MAXPUBLISHERPACKETSIZE];
-//	CreatePublisherPacket(PublisherPacket);
-//
-//
-//	if (send(sockfd,PublisherPacket,sizeof(PublisherPacket), 0) == -1)
-//		perror("send");
-	//
+	//------------
 
 	while(1)
 	{
@@ -174,7 +228,7 @@ int main(int argc, char *argv[])
 
 			if((numbytes = recv(sockfd,buf, MAXDATASIZE-1,0))==-1){
 				perror("recv");
-				exit(1);
+				//exit(1);
 				//TODO: exit again!! Where to put it
 			}
 			else if (numbytes==0){
@@ -182,52 +236,27 @@ int main(int argc, char *argv[])
 			}
 			else {
 				buf[numbytes] = '\0';
-				L2DEBUG_PRINTF3("MAIN: Received %d bytes: '%s'\n",numbytes,buf);
+
+				switch(buf[0])
+				{
+				case 'A':
+					DEBUG_PRINTF3("MAIN: Received %d bytes: '%s'\n",numbytes,buf);
+					memcpy(&RecvTime,buf+1,sizeof(RecvTime));
+					DEBUG_PRINTF3("Main: RecvTime = %u.%06u\n",RecvTime.tv_sec, RecvTime.tv_usec);
+					gettimeofday(&CurrentTime,NULL);
+					DEBUG_PRINTF3("Main: CurrentTime = %u.%06u\n",CurrentTime.tv_sec, CurrentTime.tv_usec);
+					elapsed=TimeElapsed(&CurrentTime, &RecvTime);
+					printf("Main: Elapsed : %" PRIu64 "us\n", elapsed);
+
+					break;
+				}
 			}
 
 		}
 
 		//TODO: Do the multiple packet send with the header.
-
-
-		gettimeofday(&CurrentTime,NULL);
-		if((TimeElapsed(&CurrentTime, &(A.tv)))>PACKETPERIOD_A){
-			memcpy(PacketBuffer,"A",1);
-			if (send(sockfd,PacketBuffer, A.length, 0) == -1)
-				perror("send");
-			DEBUG_PRINTF("MAIN: Packet A sent\n");
-			A.tv=CurrentTime;
-		}
-		if((TimeElapsed(&CurrentTime, &(B.tv)))>PACKETPERIOD_B){
-			memcpy(PacketBuffer,"B",1);
-			if (send(sockfd,PacketBuffer, B.length, 0) == -1)
-				perror("send");
-			DEBUG_PRINTF("MAIN: Packet B sent\n");
-			B.tv=CurrentTime;
-		}
-		if((TimeElapsed(&CurrentTime, &(C.tv)))>PACKETPERIOD_C){
-			memcpy(PacketBuffer,"C",1);
-			if (send(sockfd,PacketBuffer, C.length, 0) == -1)
-				perror("send");
-			DEBUG_PRINTF("MAIN: Packet C sent\n");
-			C.tv=CurrentTime;
-		}
-
-
+		PacketGeneration(&sockfd, &TimeA, &TimeB, &TimeC);
 	}
-
-//	if (send(sockfd, "Hello,  sending world!", 13, 0) == -1)
-//					perror("send");
-//
-//	if ((numbytes = recv(sockfd, buf, MAXDATASIZE-1, 0)) == -1) {
-//	    perror("recv");
-//	    exit(1);
-//	}
-//
-//	buf[numbytes] = '\0';
-//
-//	printf("client: received '%s'\n",buf);
-
 	close(sockfd);
 
 	return 0;
