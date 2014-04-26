@@ -8,7 +8,6 @@
 #define DEBUG
 #include "/home/andrea/workspace/ECE640/common.h"
 
-
 #define CLOUDSERVERPORT "5005"
 
 #define FOGNAMELENGTH 8

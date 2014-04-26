@@ -646,7 +646,7 @@ int main(void)
 #endif
 
 
-#ifdef FOG
+#ifdef CLOUD
 		for (i=0;i<fdfog_list.size();i++)
 			PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
 #endif

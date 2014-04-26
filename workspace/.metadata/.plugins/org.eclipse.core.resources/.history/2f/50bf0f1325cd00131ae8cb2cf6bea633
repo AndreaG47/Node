@@ -645,12 +645,6 @@ int main(void)
 		PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
 #endif
 
-
-#ifdef FOG
-		for (i=0;i<fdfog_list.size();i++)
-			PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
-#endif
-
 	}
 
 	return 0;

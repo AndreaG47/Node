@@ -4,29 +4,24 @@
  *  Created on: Apr 14, 2014
  *      Author: Andrea Gil
  */
-#define DEBUG
 
 #include "common.h"
 #define _STDC_FORMAT_MACROS
 #include <inttypes.h>
 
-#define CLOUD
-#define CLOUDT
+#define FOG
 
 #define t
 
 #ifdef t
 #define CLOUDIP 		"localhost"
 #define CLOUDSERVERPORT "5005"
-#define NAME "N" //Name of the Fog device
+#define NAME "T" //Name of the Fog device
 #define DATACONTENT "FOG-T" // Mask showing the data content
 #define IP "localhost"	//My IP, so other FOGs can connect to me
 #define FOGLISTENINGPORT 6000 //FOGSERVERPORT ad FOGLISTENINGPORT have to be the same
 #define FOGSERVERPORT "6000" //For node incoming connections
 #define FOGSERVERPORT2 "7000" //For fog incoming connections
-#define IP_FOG_G "localhost"
-#define IP_FOG_N "192.168.x.x"
-#define IP_FOG_M "192.168.x.x"
 #endif
 
 //
@@ -57,9 +52,6 @@
 #define FOGLISTENINGPORT 6000 //FOGSERVERPORT ad FOGLISTENINGPORT have to be the same
 #define FOGSERVERPORT "6000"
 #define FOGSERVERPORT2 "7000"
-#define IP_FOG_G "localhost"
-#define IP_FOG_N "192.168.x.x"
-#define IP_FOG_M "192.168.x.x"
 #endif
 
 #ifdef M
@@ -71,9 +63,6 @@
 #define FOGLISTENINGPORT 6000 //FOGSERVERPORT ad FOGLISTENINGPORT have to be the same
 #define FOGSERVERPORT "6000"
 #define FOGSERVERPORT2 "7000"
-#define IP_FOG_G "localhost"
-#define IP_FOG_N "192.168.x.x"
-#define IP_FOG_M "192.168.x.x"
 #endif
 
 //-----Modify Packet parameters----
@@ -232,36 +221,14 @@ int CreateNewFogConnection(char buf[], vector<int> *FogFds ){
 
 	DEBUG_PRINTF3("CreateNewFogConnection: Port int: %d,  port char %s:\n",portint,port);
 
-//	char *ip;
-//	ip=buf+sizeof(uint32_t)+2;
-//	DEBUG_PRINTF2("CreateNewFogConnection: IP: %s\n",ip);
+	char *ip;
+	ip=buf+sizeof(uint32_t)+2;
+	DEBUG_PRINTF2("CreateNewFogConnection: IP: %s\n",ip);
 
 
-	char name[1];
 	int fd;
-	char ip[INET6_ADDRSTRLEN];
-
-	memcpy(name,buf+sizeof(uint32_t)+2,1);
-
-	switch (name[0]){
-	case 'G':
-		memcpy(ip,IP_FOG_G,INET6_ADDRSTRLEN);
-		break;
-	case 'M':
-		memcpy(ip,IP_FOG_M,INET6_ADDRSTRLEN);
-		break;
-	case 'N':
-		memcpy(ip,IP_FOG_N,INET6_ADDRSTRLEN);
-		break;
-	}
-
-
-
-	DEBUG_PRINTF4("CreateNewFogConnection: Connect to %s : ip: %s, port %s\n",name,ip,port);
-	//ClientConnectionInit(&fd,ip,port);
-	//FogFds->push_back(fd);
-
-
+	ClientConnectionInit(&fd,ip,port);
+	FogFds->push_back(fd);
 
 	DEBUG_PRINTF("CreateNewFogConnection: End\n");
 	return 0;
@@ -643,12 +610,6 @@ int main(void)
 
 #ifdef CLOUD
 		PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
-#endif
-
-
-#ifdef FOG
-		for (i=0;i<fdfog_list.size();i++)
-			PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
 #endif
 
 	}

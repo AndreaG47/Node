@@ -5,15 +5,13 @@
  *      Author: Andrea Gil
  */
 
-#define DEBUG
-#include "/home/andrea/workspace/ECE640/common.h"
 
+#include "/home/andrea/workspace/ECE640/common.h"
 
 #define CLOUDSERVERPORT "5005"
 
 #define FOGNAMELENGTH 8
 #define SIZEDATACONTENT 8
-
 
 using namespace std;
 

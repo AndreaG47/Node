@@ -18,7 +18,7 @@
 #ifdef t
 #define CLOUDIP 		"localhost"
 #define CLOUDSERVERPORT "5005"
-#define NAME "N" //Name of the Fog device
+#define NAME "T" //Name of the Fog device
 #define DATACONTENT "FOG-T" // Mask showing the data content
 #define IP "localhost"	//My IP, so other FOGs can connect to me
 #define FOGLISTENINGPORT 6000 //FOGSERVERPORT ad FOGLISTENINGPORT have to be the same
@@ -254,8 +254,6 @@ int CreateNewFogConnection(char buf[], vector<int> *FogFds ){
 		memcpy(ip,IP_FOG_N,INET6_ADDRSTRLEN);
 		break;
 	}
-
-
 
 	DEBUG_PRINTF4("CreateNewFogConnection: Connect to %s : ip: %s, port %s\n",name,ip,port);
 	//ClientConnectionInit(&fd,ip,port);
@@ -643,12 +641,6 @@ int main(void)
 
 #ifdef CLOUD
 		PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
-#endif
-
-
-#ifdef FOG
-		for (i=0;i<fdfog_list.size();i++)
-			PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
 #endif
 
 	}

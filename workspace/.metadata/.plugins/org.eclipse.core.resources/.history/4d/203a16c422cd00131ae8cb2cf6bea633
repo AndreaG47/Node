@@ -237,7 +237,7 @@ int CreateNewFogConnection(char buf[], vector<int> *FogFds ){
 //	DEBUG_PRINTF2("CreateNewFogConnection: IP: %s\n",ip);
 
 
-	char name[1];
+	char name[]='0';
 	int fd;
 	char ip[INET6_ADDRSTRLEN];
 
@@ -643,12 +643,6 @@ int main(void)
 
 #ifdef CLOUD
 		PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
-#endif
-
-
-#ifdef FOG
-		for (i=0;i<fdfog_list.size();i++)
-			PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
 #endif
 
 	}

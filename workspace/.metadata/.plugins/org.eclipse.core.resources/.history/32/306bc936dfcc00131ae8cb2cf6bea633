@@ -5,15 +5,13 @@
  *      Author: Andrea Gil
  */
 
-#define DEBUG
-#include "/home/andrea/workspace/ECE640/common.h"
 
+#include "/home/andrea/workspace/ECE640/common.h"
 
 #define CLOUDSERVERPORT "5005"
 
 #define FOGNAMELENGTH 8
 #define SIZEDATACONTENT 8
-
 
 using namespace std;
 
@@ -136,9 +134,6 @@ int CreateNewConnectionInformationPacket(unsigned int* i, char buf[], char ip[],
 
 	//memcpy(buf+*counter,ip,INET6_ADDRSTRLEN);
 	//*counter+=INET6_ADDRSTRLEN;
-
-	memcpy(buf+*counter,Database[(*i)].name,1);
-	*counter+=1;
 
 	DEBUG_PRINTF("CreateNewConnectionInformationPacket: End\n");
 	return 0;

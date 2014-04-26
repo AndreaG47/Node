@@ -4,21 +4,19 @@
  *  Created on: Apr 14, 2014
  *      Author: Andrea Gil
  */
-#define DEBUG
 
 #include "common.h"
 #define _STDC_FORMAT_MACROS
 #include <inttypes.h>
 
-#define CLOUD
-#define CLOUDT
+#define FOG
 
 #define t
 
 #ifdef t
 #define CLOUDIP 		"localhost"
 #define CLOUDSERVERPORT "5005"
-#define NAME "N" //Name of the Fog device
+#define NAME "T" //Name of the Fog device
 #define DATACONTENT "FOG-T" // Mask showing the data content
 #define IP "localhost"	//My IP, so other FOGs can connect to me
 #define FOGLISTENINGPORT 6000 //FOGSERVERPORT ad FOGLISTENINGPORT have to be the same
@@ -255,9 +253,7 @@ int CreateNewFogConnection(char buf[], vector<int> *FogFds ){
 		break;
 	}
 
-
-
-	DEBUG_PRINTF4("CreateNewFogConnection: Connect to %s : ip: %s, port %s\n",name,ip,port);
+	DEBUG_PRINTF4("CreateNewFogConnection: Connect to %s : ip: %s, port %s\n",name,ip,port)
 	//ClientConnectionInit(&fd,ip,port);
 	//FogFds->push_back(fd);
 
@@ -643,12 +639,6 @@ int main(void)
 
 #ifdef CLOUD
 		PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
-#endif
-
-
-#ifdef FOG
-		for (i=0;i<fdfog_list.size();i++)
-			PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
 #endif
 
 	}
