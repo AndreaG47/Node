@@ -185,7 +185,7 @@ int SuscriberInformationChoicesAction(int* socketfd, char* pbuf,int* numbytes){
 //					break
 //				}
 
-				if (send(Database[i].socket,temp,m,0)==-1){ //TODO:IMPORTANT: Change *sockfd back to send(Database[i].socket
+				if (send(*socketfd,temp,m,0)==-1){ //TODO:IMPORTANT: Change *sockfd back to send(Database[i].socket
 						 perror("SuscriberInformationChoicesAction: send");
 					 }
 			}
@@ -202,7 +202,7 @@ int ForwardIncomingTraffic(int* sockfd, char buf[]){
 	return 0;
 }
 
-int ReceivedNewConnectionInfo(char buf[],vector<struct FogDatabase>* list, int* i){
+int ReceivedNewConnectionInfo(char buf[],vector<struct FogDatabase>* list){
 
 	DEBUG_PRINTF("ReceivedNewConnectionInfo: Start\n");
 
@@ -230,9 +230,6 @@ int ReceivedNewConnectionInfo(char buf[],vector<struct FogDatabase>* list, int* 
 	info.listeningport=ntohl(port);
 	DEBUG_PRINTF2("ReceivedNewConnectionInfo: port: %d\n",info.listeningport);
 	a+=sizeof(uint32_t);
-
-	info.socket=*i;
-	DEBUG_PRINTF2("ReceivedNewConnectionInfo: socket: %d\n",info.socket);
 
 	list->push_back(info);
 	DEBUG_PRINTF("ReceivedNewConnectionInfo: Info added to database\n");
@@ -380,7 +377,7 @@ int main(void)
 
 						break;
 					case 'E':
-						ReceivedNewConnectionInfo(buf,&Database,&(fd_list[i]));
+						ReceivedNewConnectionInfo(buf,&Database,*i);
 
 
 						break;

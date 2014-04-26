@@ -185,7 +185,7 @@ int SuscriberInformationChoicesAction(int* socketfd, char* pbuf,int* numbytes){
 //					break
 //				}
 
-				if (send(Database[i].socket,temp,m,0)==-1){ //TODO:IMPORTANT: Change *sockfd back to send(Database[i].socket
+				if (send(*socketfd,temp,m,0)==-1){ //TODO:IMPORTANT: Change *sockfd back to send(Database[i].socket
 						 perror("SuscriberInformationChoicesAction: send");
 					 }
 			}

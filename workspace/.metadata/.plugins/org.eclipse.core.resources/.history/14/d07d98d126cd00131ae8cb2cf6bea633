@@ -12,7 +12,6 @@
 
 #define CLOUD
 #define CLOUDT
-#define FOG
 
 #define t
 
