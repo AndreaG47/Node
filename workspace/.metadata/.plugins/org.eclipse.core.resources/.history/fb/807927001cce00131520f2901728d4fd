@@ -15,6 +15,9 @@
 #endif
 
 
+#include "/users/heyul/workspace/ECE640/common.h"
+
+
 #define IP_FOG_G "192.168.x.x"
 #define IP_FOG_N "192.168.x.x"
 #define IP_FOG_M "192.168.x.x"
