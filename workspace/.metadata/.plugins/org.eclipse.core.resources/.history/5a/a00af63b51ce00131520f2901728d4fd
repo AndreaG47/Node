@@ -117,7 +117,6 @@ int PacketGeneration(int *sockfd,struct timeval *TimeA, struct timeval* TimeB, s
 
 		if (send(*sockfd,PacketBuffer, PACKETsize_A, 0) == -1)
 			perror("send");
-		DEBUG_PRINTF("PacketGeneration:Packet A sent\n");
 		*TimeA=CurrentTime;
 	}
 //	if((TimeElapsed(&CurrentTime, TimeB))>PACKETPERIOD_B){
@@ -674,7 +673,7 @@ int main(void)
 			if (sendtofog && (fdfog_list.size()>1)){
 				for (i=1;i<fdfog_list.size();i++){
 					PacketGeneration(&(fdfog_list[i]),&TimeA,&TimeB,&TimeC);
-
+					DEBUG_PRINTF2("Packet A sent to fog socket %d\n",i);
 				}
 			}
 #endif
