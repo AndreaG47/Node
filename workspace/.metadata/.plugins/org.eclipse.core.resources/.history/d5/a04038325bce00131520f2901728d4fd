@@ -586,9 +586,8 @@ int main(void)
 				case 'E':
 					switch (buf[1]){
 					case 'A': //Receive from cloud command to connect to other fog
-						DEBUG_PRINTF("Main: Fog: Case EA\n");
+						DEBUG_PRINTF("Main: Case EA\n");
 						CreateNewFogConnection(buf,&fdfog_list);
-						DEBUG_PRINTF2("Main: Fog: New socket %d\n",*fdfog_list.back());
 						break;
 					}
 					break;
@@ -608,10 +607,6 @@ int main(void)
 					IncomingNewConnection(&fogfd,&fdsfog_back,&fdfog_list);
 					sendtofog=true;
 				}
-
-		if((FD_ISSET(5,&fdsfog))){
-			DEBUG_PRINTF("TEST\n");
-		}
 
 		for (i=0; i<fdfog_list.size();i++) { //Fog existing connections
 			if (FD_ISSET(fdfog_list[i],&fdsfog)){
