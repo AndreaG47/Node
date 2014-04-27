@@ -247,9 +247,6 @@ int CreateNewFogConnection(char buf[], vector<int> *FogFds ){
 	int fd;
 	char ip[INET6_ADDRSTRLEN];
 
-	DEBUG_PRINTF2("CreateNewFogConnection: Sizeof name %d\n",sizeof(name));
-	DEBUG_PRINTF2("CreateNewFogConnection: Sizeof NAME %d\n",sizeof(NAME));
-
 	memcpy(name,buf+sizeof(uint32_t)+2,1);
 
 	switch (name[0]){
@@ -263,13 +260,12 @@ int CreateNewFogConnection(char buf[], vector<int> *FogFds ){
 		memcpy(ip,IP_FOG_N,INET6_ADDRSTRLEN);
 		break;
 	}
-	int s=strcmp(name,NAME);
 
-	if ((s!=0)){
+	if (!(strcmp(name,NAME)==0)){
 		DEBUG_PRINTF4("CreateNewFogConnection: Connect to %s : ip: %s, port %s\n",name,ip,port);
 		ClientConnectionInit(&fd,ip,port);
 		FogFds->push_back(fd);
-	}
+	}//99immjhuhy;;
 	DEBUG_PRINTF("CreateNewFogConnection: End\n");
 	return 0;
 }
