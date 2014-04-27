@@ -10,8 +10,6 @@
 #define _STDC_FORMAT_MACROS
 #include <inttypes.h>
 
-#define G  //Name of the local fog, options: M,N,G. t is for testing, don't use it on GENI
-
 #define CLOUD
 #define CLOUDT
 #define FOG
@@ -19,6 +17,7 @@
 #define FORWARD_NODE
 #define FORWARD_FOG
 
+#define G  //Name of the local fog, options: M,N,G. t is for testing, don't use it on GENI
 
 #ifdef t
 #define CLOUDIP 		"localhost"
@@ -602,7 +601,7 @@ int main(void)
 		//Fogs
 
 		if (FD_ISSET(fogfd,&fdsfog)){  //Node accept new connections
-					DEBUG_PRINTF("Main: New incoming fog connection");
+					DEBUG_PRINTF("Main: New incomming fog connection");
 					IncomingNewConnection(&fogfd,&fdsfog_back,&fdfog_list);
 					sendtofog=true;
 				}
@@ -634,7 +633,6 @@ int main(void)
 					switch(buf[0])
 					{
 					case 'A':
-					//	DE
 #ifdef FORWARD_FOG
 						ForwardPacket(buf,&fdfog_list[i],&numbytes);
 #endif

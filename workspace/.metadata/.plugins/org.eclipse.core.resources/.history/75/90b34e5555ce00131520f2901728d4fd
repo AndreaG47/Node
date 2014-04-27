@@ -602,7 +602,7 @@ int main(void)
 		//Fogs
 
 		if (FD_ISSET(fogfd,&fdsfog)){  //Node accept new connections
-					DEBUG_PRINTF("Main: New incoming fog connection");
+					DEBUG_PRINTF("Main: New incomming fog connection");
 					IncomingNewConnection(&fogfd,&fdsfog_back,&fdfog_list);
 					sendtofog=true;
 				}
@@ -634,7 +634,6 @@ int main(void)
 					switch(buf[0])
 					{
 					case 'A':
-					//	DE
 #ifdef FORWARD_FOG
 						ForwardPacket(buf,&fdfog_list[i],&numbytes);
 #endif
