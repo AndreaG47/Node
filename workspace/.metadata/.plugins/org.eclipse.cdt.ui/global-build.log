@@ -1319,3 +1319,89 @@ Finished building target: ECE640
 15:37:23 **** Incremental Build of configuration Debug for project ECE640Client ****
 make all 
 make: Nothing to be done for `all'.
+16:59:18 **** Incremental Build of configuration Debug for project ClientTest ****
+make all 
+make: Nothing to be done for `all'.
+16:59:18 **** Incremental Build of configuration Debug for project Cloud ****
+make all 
+Building file: ../Cloud_main.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Cloud_main.d" -MT"Cloud_main.d" -o "Cloud_main.o" "../Cloud_main.cpp"
+../Cloud_main.cpp: In function ‘int SuscriberInformationChoicesAction(int*, char*, int*)’:
+../Cloud_main.cpp:171:33: warning: variable ‘pipstr’ set but not used [-Wunused-but-set-variable]
+../Cloud_main.cpp:172:27: warning: variable ‘ptemp’ set but not used [-Wunused-but-set-variable]
+../Cloud_main.cpp: In function ‘int ForwardPacket(char*, int*, int*)’:
+../Cloud_main.cpp:262:51: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../Cloud_main.cpp:262:51: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+Finished building: ../Cloud_main.cpp
+ 
+Building target: Cloud
+Invoking: GCC C++ Linker
+g++  -o "Cloud"  ./Cloud_main.o   
+Finished building target: Cloud
+ 
+16:59:19 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
+make all 
+Building file: ../fog.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"fog.d" -MT"fog.d" -o "fog.o" "../fog.cpp"
+../fog.cpp: In function ‘int ForwardPacket(char*, int*, int*)’:
+../fog.cpp:147:2: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:147:2: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp: In function ‘int SelectFogs(int*, char*, int*)’:
+../fog.cpp:222:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp: In function ‘int main()’:
+../fog.cpp:560:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:560:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:562:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:562:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:564:47: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘uint64_t {aka long long unsigned int}’ [-Wformat]
+../fog.cpp:604:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:384:30: warning: unused variable ‘new_fd’ [-Wunused-variable]
+../fog.cpp:386:7: warning: unused variable ‘port2’ [-Wunused-variable]
+Finished building: ../fog.cpp
+ 
+Building target: ECE640
+Invoking: Cross G++ Linker
+g++  -o "ECE640"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./fog.o ./test1.o   
+Finished building target: ECE640
+ 
+16:59:20 **** Incremental Build of configuration Debug for project ECE640Client ****
+make all 
+make: Nothing to be done for `all'.
+16:59:25 **** Incremental Build of configuration Debug for project ClientTest ****
+make all 
+make: Nothing to be done for `all'.
+16:59:25 **** Incremental Build of configuration Debug for project Cloud ****
+make all 
+make: Nothing to be done for `all'.
+16:59:25 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
+make all 
+make: Nothing to be done for `all'.
+16:59:26 **** Incremental Build of configuration Debug for project ECE640Client ****
+make all 
+make: Nothing to be done for `all'.
+16:59:29 **** Incremental Build of configuration Debug for project ClientTest ****
+make all 
+make: Nothing to be done for `all'.
+16:59:29 **** Incremental Build of configuration Debug for project Cloud ****
+make all 
+make: Nothing to be done for `all'.
+16:59:30 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
+make all 
+make: Nothing to be done for `all'.
+16:59:30 **** Incremental Build of configuration Debug for project ECE640Client ****
+make all 
+make: Nothing to be done for `all'.
+16:59:33 **** Incremental Build of configuration Debug for project ClientTest ****
+make all 
+make: Nothing to be done for `all'.
+16:59:33 **** Incremental Build of configuration Debug for project Cloud ****
+make all 
+make: Nothing to be done for `all'.
+16:59:33 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
+make all 
+make: Nothing to be done for `all'.
+16:59:34 **** Incremental Build of configuration Debug for project ECE640Client ****
+make all 
+make: Nothing to be done for `all'.

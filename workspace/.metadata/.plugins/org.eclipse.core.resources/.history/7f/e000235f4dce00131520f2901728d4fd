@@ -216,7 +216,7 @@ int SelectFogs(int* socketfd, char buf[],int* n){
 
 	memcpy(temp+i,header,2);
 	i+=2;
-	memcpy(temp+1,name,1);
+	memcpy(temp+1,NAME,1);
 	i+=1;
 
 	for(int a=0;a<Database.size();a++){

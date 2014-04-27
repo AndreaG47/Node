@@ -138,15 +138,13 @@ int GetIPaddress(int *fd, char ipstr2[])
 	return 0;
 }
 
-int CreateNewConnectionInformationPacket(unsigned int* i, char buf[], char ip[], int* counter,char dest[]){
+int CreateNewConnectionInformationPacket(unsigned int* i, char buf[], char ip[], int* counter){
 
 	DEBUG_PRINTF("CreateNewConnectionInformationPacket: Start\n");
 	char header[]="EA";
-	memcpy(buf,header,2);
 
+	memcpy(buf,header,2);
 	*counter+=2;
-//	memcpy(buf+*counter,dest,1)
-//	*counter+=1;
 	uint32_t a=htonl(Database[(*i)].listeningport);
 	memcpy(buf+*counter,&a,sizeof(uint32_t));
 	*counter+=sizeof(uint32_t);
@@ -155,8 +153,7 @@ int CreateNewConnectionInformationPacket(unsigned int* i, char buf[], char ip[],
 	//memcpy(buf+*counter,ip,INET6_ADDRSTRLEN);
 	//*counter+=INET6_ADDRSTRLEN;
 
-	//memcpy(buf+*counter,Database[(*i)].name,1);
-	memcpy(buf+*counter,dest,1);
+	memcpy(buf+*counter,Database[(*i)].name,1);
 	*counter+=1;
 
 	DEBUG_PRINTF("CreateNewConnectionInformationPacket: End\n");
@@ -179,10 +176,6 @@ int SuscriberInformationChoicesAction(int* socketfd, char* pbuf,int* numbytes){
 	int m=0;
 	int p=2; //Two is because these are the two bytes that it uses for header.
 
-	char destname[1];
-	memset(destname,0,1);
-	memcpy(destname,pbuf+p,1);
-	p+=1;
 
 	DEBUG_PRINTF("SuscriberInformationChoicesAction: Comparison\n");
 	GetIPaddress(socketfd,ipstr);
@@ -195,7 +188,7 @@ int SuscriberInformationChoicesAction(int* socketfd, char* pbuf,int* numbytes){
 		for (i=0;i<Database.size();i++){
 			if((Database[i].name[0]==pbuf[p])){
 
-				CreateNewConnectionInformationPacket(&i,temp,ipstr,&m,destname);
+				CreateNewConnectionInformationPacket(&i,temp,ipstr,&m);
 
 				if (send(Database[i].socket,temp,m,0)==-1){ //TODO:IMPORTANT: Change *sockfd back to send(Database[i].socket
 						 perror("SuscriberInformationChoicesAction: send");

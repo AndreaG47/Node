@@ -1,11 +1,6 @@
-15:37:21 **** Incremental Build of configuration Debug for project Cloud ****
+16:59:33 **** Incremental Build of configuration Debug for project Cloud ****
 make all 
-Building file: ../Cloud_main.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Cloud_main.d" -MT"Cloud_main.d" -o "Cloud_main.o" "../Cloud_main.cpp"
-../Cloud_main.cpp:15:55: fatal error: /users/heyul/Node/workspace/ECE640/common.h: No such file or directory
-compilation terminated.
-make: *** [Cloud_main.o] Error 1
+make: Nothing to be done for `all'.
 
-15:37:22 Build Finished (took 299ms)
+16:59:33 Build Finished (took 84ms)
 

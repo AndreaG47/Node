@@ -145,8 +145,8 @@ int CreateNewConnectionInformationPacket(unsigned int* i, char buf[], char ip[],
 	memcpy(buf,header,2);
 
 	*counter+=2;
-//	memcpy(buf+*counter,dest,1)
-//	*counter+=1;
+	memcpy(buf+*counter,dest,1)
+	*counter+=1;
 	uint32_t a=htonl(Database[(*i)].listeningport);
 	memcpy(buf+*counter,&a,sizeof(uint32_t));
 	*counter+=sizeof(uint32_t);
@@ -155,8 +155,7 @@ int CreateNewConnectionInformationPacket(unsigned int* i, char buf[], char ip[],
 	//memcpy(buf+*counter,ip,INET6_ADDRSTRLEN);
 	//*counter+=INET6_ADDRSTRLEN;
 
-	//memcpy(buf+*counter,Database[(*i)].name,1);
-	memcpy(buf+*counter,dest,1);
+	memcpy(buf+*counter,Database[(*i)].name,1);
 	*counter+=1;
 
 	DEBUG_PRINTF("CreateNewConnectionInformationPacket: End\n");
