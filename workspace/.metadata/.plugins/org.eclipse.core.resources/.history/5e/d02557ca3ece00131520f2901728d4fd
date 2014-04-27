@@ -652,7 +652,7 @@ int main(void)
 #endif
 
 #ifdef CLOUD
-//			PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
+			PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
 #endif
 
 

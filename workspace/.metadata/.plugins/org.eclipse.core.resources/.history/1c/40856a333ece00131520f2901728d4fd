@@ -117,7 +117,8 @@ int PacketGeneration(int *sockfd,struct timeval *TimeA, struct timeval* TimeB, s
 
 		if (send(*sockfd,PacketBuffer, PACKETsize_A, 0) == -1)
 			perror("send");
-s		*TimeA=CurrentTime;
+		DEBUG_PRINTF("MAIN: Packet A sent\n");
+		*TimeA=CurrentTime;
 	}
 //	if((TimeElapsed(&CurrentTime, TimeB))>PACKETPERIOD_B){
 //		memcpy(PacketBuffer,"B",1);
@@ -652,17 +653,13 @@ int main(void)
 #endif
 
 #ifdef CLOUD
+		if (ConnectionRequest)
 //			PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
 #endif
 
 
 #ifdef FOG
-			if (ConnectionRequest){
-				for (i=0;fdfog_list.size();i++){
-					PacketGeneration(&(fdfog_list[i]),&TimeA,&TimeB,&TimeC);
-					DEBUG_PRINTF2("Packet A sent to fog socket %d\n",i);
-				}
-			}
+		PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
 #endif
 
 	}

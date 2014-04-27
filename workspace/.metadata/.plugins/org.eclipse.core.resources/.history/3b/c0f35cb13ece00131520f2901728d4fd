@@ -652,17 +652,18 @@ int main(void)
 #endif
 
 #ifdef CLOUD
+		if (ConnectionRequest)
 //			PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
 #endif
 
 
 #ifdef FOG
-			if (ConnectionRequest){
-				for (i=0;fdfog_list.size();i++){
-					PacketGeneration(&(fdfog_list[i]),&TimeA,&TimeB,&TimeC);
-					DEBUG_PRINTF2("Packet A sent to fog socket %d\n",i);
-				}
+			for (i=0;fdfog_list.size();i++){
+				PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
+				DEBUG_PRINTF2("Packet A sent to fog socket %d\n",i);
+
 			}
+
 #endif
 
 	}

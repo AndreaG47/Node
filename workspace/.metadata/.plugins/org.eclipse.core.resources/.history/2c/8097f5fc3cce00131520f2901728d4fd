@@ -8,7 +8,7 @@
 
 #define DEBUG
 #define FORWARD
-//#define test
+#define test
 #ifdef test
 #include "/home/andrea/workspace/ECE640/common.h"
 #else
