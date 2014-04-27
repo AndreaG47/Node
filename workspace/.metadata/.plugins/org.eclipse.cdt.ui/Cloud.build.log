@@ -1,6 +1,6 @@
-11:51:41 **** Incremental Build of configuration Debug for project Cloud ****
+14:23:56 **** Incremental Build of configuration Debug for project Cloud ****
 make all 
 make: Nothing to be done for `all'.
 
-11:51:41 Build Finished (took 88ms)
+14:23:56 Build Finished (took 74ms)
 

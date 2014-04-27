@@ -213,8 +213,7 @@ int SelectFogs(int* socketfd, char buf[]){
 	memcpy(temp+i,header,2);
 	i+=2;
 	for(int a=0;a<Database.size();a++){
-		if ((Database[a].name)[0]!=name[0])
-			DEBUG_PRINTF2("SelectFogs: Add %s to list of selected fogs\n",Database[a].name);
+		if ((strcmp((Database[a].name)[0],name[0])==0))
 			memcpy(temp+i,Database[a].name,1);
 		i++;
 	}

@@ -1,6 +1,6 @@
-11:51:41 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
+14:23:56 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
 make all 
 make: Nothing to be done for `all'.
 
-11:51:41 Build Finished (took 84ms)
+14:23:57 Build Finished (took 79ms)
 

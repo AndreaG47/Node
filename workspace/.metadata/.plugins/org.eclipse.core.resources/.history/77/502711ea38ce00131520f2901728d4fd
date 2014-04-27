@@ -233,7 +233,6 @@ int ReceivedNewConnectionInfo(char buf[],vector<struct FogDatabase>* list, int* 
 
 	list->push_back(info);
 	DEBUG_PRINTF("ReceivedNewConnectionInfo: Info added to database\n");
-	DEBUG_PRINTF2("ReceivedNewConnectionInfo: %d elements in database\n",list->size());
 	DEBUG_PRINTF("ReceivedNewConnectionInfo: End\n");
 	return 0;
 }

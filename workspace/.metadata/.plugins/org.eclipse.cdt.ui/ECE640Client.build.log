@@ -1,6 +1,6 @@
-11:51:41 **** Incremental Build of configuration Debug for project ECE640Client ****
+14:23:57 **** Incremental Build of configuration Debug for project ECE640Client ****
 make all 
 make: Nothing to be done for `all'.
 
-11:51:41 Build Finished (took 83ms)
+14:23:57 Build Finished (took 90ms)
 

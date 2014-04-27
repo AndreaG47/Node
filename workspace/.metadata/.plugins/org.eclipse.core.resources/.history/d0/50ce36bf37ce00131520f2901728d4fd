@@ -205,17 +205,12 @@ int SelectFogs(int* socketfd, char buf[]){
 	char temp[MAXDATASIZE];
 	memset(temp,0,MAXDATASIZE);
 
-	char name[1];
-	memset(name,0,1);
-	memcpy(name,NAME,1);
 	RetrieveFogInfo(buf);
 
 	memcpy(temp+i,header,2);
 	i+=2;
 	for(int a=0;a<Database.size();a++){
-		if ((Database[a].name)[0]!=name[0])
-			DEBUG_PRINTF2("SelectFogs: Add %s to list of selected fogs\n",Database[a].name);
-			memcpy(temp+i,Database[a].name,1);
+		memcpy(temp+i,Database[a].name,1);
 		i++;
 	}
 	numbytes=i;
