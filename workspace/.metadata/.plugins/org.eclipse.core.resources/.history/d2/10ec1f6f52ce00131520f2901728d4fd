@@ -316,7 +316,6 @@ int IncomingNewConnection(int *sockfd, fd_set *fds_back, vector<int> *fd_list){
 		perror("IncomingNewConnection: accept");
 	}
 
-	DEBUG_PRINTF2("IncomingNewConnection: Socket %d\n",new_fd);
 	DEBUG_PRINTF("IncomingNewConnection: End\n");
 	return 0;
 }
@@ -634,7 +633,7 @@ int main(void)
 					{
 					case 'A':
 #ifdef FORWARD_FOG
-						ForwardPacket(buf,&fdfog_list[i],&numbytes);
+						ForwardPacket(buf,&fd_list[i],&numbytes);
 #endif
 						break;
 //					case 'B':
