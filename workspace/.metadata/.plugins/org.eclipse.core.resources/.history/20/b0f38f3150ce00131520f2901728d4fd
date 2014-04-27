@@ -459,7 +459,7 @@ int main(void)
 	DEBUG_PRINTF2("Main: Max_fdfog= %d\n",max_fdfog);
 	DEBUG_PRINTF("Main: Enter to main while loop\n");
 
-	bool sendtofog=false;
+	bool sendtofog
 
 
 	//
@@ -604,7 +604,7 @@ int main(void)
 					sendtofog=true;
 				}
 
-		for (i=1; i<fdfog_list.size();i++) { //Fog existing connections
+		for (i=0; i<fdfog_list.size();i++) { //Fog existing connections
 			if (FD_ISSET(fdfog_list[i],&fdsfog)){
 
 				memset(buf,0,sizeof(buf));
@@ -669,8 +669,8 @@ int main(void)
 #endif
 
 
-#ifdef FOG
-			if (sendtofog && (fdfog_list.size()>1)){
+#ifndef FOG
+			if (ConnectionRequest && (fdfog_list.size()>1)){
 				for (i=1;i<fdfog_list.size();i++){
 					PacketGeneration(&(fdfog_list[i]),&TimeA,&TimeB,&TimeC);
 					DEBUG_PRINTF2("Packet A sent to fog socket %d\n",i);

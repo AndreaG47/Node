@@ -216,7 +216,7 @@ int SelectFogs(int* socketfd, char buf[],int* n){
 
 	memcpy(temp+i,header,2);
 	i+=2;
-	memcpy(temp+i,name,1);
+	memcpy(temp+1,name,1);
 	i+=1;
 
 	for(int a=0;a<Database.size();a++){
@@ -459,8 +459,6 @@ int main(void)
 	DEBUG_PRINTF2("Main: Max_fdfog= %d\n",max_fdfog);
 	DEBUG_PRINTF("Main: Enter to main while loop\n");
 
-	bool sendtofog=false;
-
 
 	//
 	while(1) {  // main accept() loop
@@ -601,10 +599,9 @@ int main(void)
 		if (FD_ISSET(fogfd,&fdsfog)){  //Node accept new connections
 					DEBUG_PRINTF("Main: New incomming fog connection");
 					IncomingNewConnection(&fogfd,&fdsfog_back,&fdfog_list);
-					sendtofog=true;
 				}
 
-		for (i=1; i<fdfog_list.size();i++) { //Fog existing connections
+		for (i=0; i<fdfog_list.size();i++) { //Fog existing connections
 			if (FD_ISSET(fdfog_list[i],&fdsfog)){
 
 				memset(buf,0,sizeof(buf));
@@ -669,8 +666,8 @@ int main(void)
 #endif
 
 
-#ifdef FOG
-			if (sendtofog && (fdfog_list.size()>1)){
+#ifndef FOG
+			if (ConnectionRequest && (fdfog_list.size()>1)){
 				for (i=1;i<fdfog_list.size();i++){
 					PacketGeneration(&(fdfog_list[i]),&TimeA,&TimeB,&TimeC);
 					DEBUG_PRINTF2("Packet A sent to fog socket %d\n",i);
