@@ -17,7 +17,7 @@
 #define FORWARD_NODE
 #define FORWARD_FOG
 
-#define G  //Name of the local fog, options: M,N,G. t is for testing, don't use it on GENI
+#define t   //Name of the local fog, options: M,N,G. t is for testing, don't use it on GENI
 
 #ifdef t
 #define CLOUDIP 		"localhost"
