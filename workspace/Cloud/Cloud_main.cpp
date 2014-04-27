@@ -5,6 +5,7 @@
  *      Author: Andrea Gil
  */
 
+<<<<<<< HEAD
 #define DEBUG
 #define test
 #ifdef test
@@ -12,6 +13,10 @@
 #else
 #include "/users/heyul/Node/workspace/ECE640/common.h"
 #endif
+=======
+
+#include "/users/heyul/workspace/ECE640/common.h"
+>>>>>>> 3ae1e547661c16104458993e70f7233cc98d552e
 
 #define IP_FOG_G "192.168.x.x"
 #define IP_FOG_N "192.168.x.x"
