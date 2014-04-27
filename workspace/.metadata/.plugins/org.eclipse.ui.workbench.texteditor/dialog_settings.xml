@@ -2,27 +2,27 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="291" key="DIALOG_WIDTH"/>
-		<item value="200" key="DIALOG_Y_ORIGIN"/>
+		<item value="238" key="DIALOG_Y_ORIGIN"/>
+		<item value="687" key="DIALOG_X_ORIGIN"/>
 		<item value="433" key="DIALOG_HEIGHT"/>
-		<item value="833" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="true" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wholeword"/>
-		<item value="send" key="selection"/>
+		<item value="" key="selection"/>
 		<list key="findhistory">
-			<item value="send"/>
-			<item value="time"/>
-			<item value="packetbuf"/>
-			<item value="Current"/>
-			<item value="elapsed"/>
-			<item value="packet doesn&apos;t match"/>
+			<item value="T"/>
+			<item value="ServerConnectionInit"/>
+			<item value="ServerConnectinInit"/>
 			<item value="CreateNewFogConnection"/>
-			<item value="client: co"/>
+			<item value="printf"/>
+			<item value="DEBUG"/>
+			<item value="RecvTime"/>
+			<item value="TEST"/>
 		</list>
 		<list key="replacehistory">
 			<item value="FOGLISTENINGPORT"/>

@@ -170,7 +170,8 @@ int SuscriberInformationChoicesAction(int* socketfd, char* pbuf,int* numbytes){
 
 	for (;p<*numbytes;p++){
 
-		for (i=0;i<Database.size();i++){
+		for (i=0;i<Database.size();i++)
+		{
 			if((Database[i].name[0]==pbuf[p])){
 				DEBUG_PRINTF("SuscriberInformationChoicesAction: Comparison\n");
 				GetIPaddress(socketfd,ipstr);
@@ -185,6 +186,7 @@ int SuscriberInformationChoicesAction(int* socketfd, char* pbuf,int* numbytes){
 				}
 			}
 		}
+	}
 
 	DEBUG_PRINTF("SuscriberInformationChoicesAction: End\n");
 	return 0;

@@ -256,11 +256,14 @@ int CreateNewFogConnection(char buf[], vector<int> *FogFds ){
 		break;
 	}
 
-	if (strcmp(name,NAME)!=-1){
-		DEBUG_PRINTF4("CreateNewFogConnection: Connect to %s : ip: %s, port %s\n",name,ip,port);
-		ClientConnectionInit(&fd,ip,port);
-		FogFds->push_back(fd);
-	}//99immjhuhy;;
+	if (strcmp(name,NAME))
+
+	DEBUG_PRINTF4("CreateNewFogConnection: Connect to %s : ip: %s, port %s\n",name,ip,port);
+	ClientConnectionInit(&fd,ip,port);
+	FogFds->push_back(fd);
+
+
+
 	DEBUG_PRINTF("CreateNewFogConnection: End\n");
 	return 0;
 }
