@@ -69,7 +69,7 @@
 #ifdef M
 #define CLOUDIP 		"192.168.3.1"
 #define CLOUDSERVERPORT "5005"
-#define NAME "M" //Name of the Fog device
+#define NAME "N" //Name of the Fog device
 #define DATACONTENT "FOG-M" // Mask showing the data content
 #define IP "192.168.3.2"	//IP so other FOGs can connect to it
 #define FOGLISTENINGPORT 7000 //FOGSERVERPORT ad FOGLISTENINGPORT2 have to be the same
