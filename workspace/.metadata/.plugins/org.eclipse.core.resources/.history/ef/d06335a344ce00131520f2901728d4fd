@@ -642,7 +642,7 @@ int main(void)
 		gettimeofday(&CurrentTime,NULL);
 
 		if (ConnectionRequest==false){
-			if((TimeElapsed(&CurrentTime, &StartTime))>25000000){
+			if((TimeElapsed(&CurrentTime, &StartTime))>35000000){
 				DEBUG_PRINTF("Main: TimeElapsed\n");
 				RequestInformationfromotherFogs(&Cloudfd);
 				ConnectionRequest = true;
@@ -657,11 +657,11 @@ int main(void)
 
 
 #ifdef FOG
-			if (ConnectionRequest && (fdfog_list.size()>1)){
+			if (ConnectionRequest){
 				DEBUG_PRINTF3("Main: Fog messages, sizeof fdfog_list: %d, socket: %d\n",fdfog_list.size(),fdfog_list[0]);
-				for (i=1;fdfog_list.size();i++){
-					PacketGeneration(&(fdfog_list[i]),&TimeA,&TimeB,&TimeC);
-					DEBUG_PRINTF2("Packet A sent to fog socket %d\n",i);
+				for (i=0;fdfog_list.size();i++){
+//					PacketGeneration(&(fdfog_list[i]),&TimeA,&TimeB,&TimeC);
+//					DEBUG_PRINTF2("Packet A sent to fog socket %d\n",i);
 				}
 			}
 #endif

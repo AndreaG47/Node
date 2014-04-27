@@ -1,4 +1,4 @@
-15:07:46 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
+15:37:22 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
 make all 
 Building file: ../fog.cpp
 Invoking: Cross G++ Compiler
@@ -27,5 +27,5 @@ g++  -o "ECE640"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./fog.
 Finished building target: ECE640
  
 
-15:07:47 Build Finished (took 530ms)
+15:37:22 Build Finished (took 674ms)
 

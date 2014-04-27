@@ -1,4 +1,4 @@
-15:07:46 **** Incremental Build of configuration Debug for project Cloud ****
+15:37:21 **** Incremental Build of configuration Debug for project Cloud ****
 make all 
 Building file: ../Cloud_main.cpp
 Invoking: GCC C++ Compiler
@@ -7,5 +7,5 @@ g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Cloud_main.d" -MT"Cloud_mai
 compilation terminated.
 make: *** [Cloud_main.o] Error 1
 
-15:07:46 Build Finished (took 130ms)
+15:37:22 Build Finished (took 299ms)
 
