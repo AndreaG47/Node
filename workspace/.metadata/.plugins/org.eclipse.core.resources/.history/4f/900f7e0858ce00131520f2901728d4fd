@@ -118,7 +118,7 @@ int PacketGeneration(int *sockfd,struct timeval *TimeA, struct timeval* TimeB, s
 
 		if (send(*sockfd,PacketBuffer, PACKETsize_A, 0) == -1)
 			perror("send");
-		DEBUG_PRINTF2("PacketGeneration:Packet A sent to socket %d\n",*sockfd);
+		DEBUG_PRINTF2("PacketGeneration:Packet A sentto socket %d\n",*sockfd);
 		*TimeA=CurrentTime;
 	}
 //	if((TimeElapsed(&CurrentTime, TimeB))>PACKETPERIOD_B){
@@ -282,7 +282,6 @@ int CreateNewFogConnection(char buf[], vector<int> *FogFds ){
 	DEBUG_PRINTF4("CreateNewFogConnection: Connect to %s : ip: %s, port %s\n",name,ip,port);
 	ClientConnectionInit(&fd,ip,port);
 	FogFds->push_back(fd);
-	DEBUG_PRINTF2("CreateNewFogConnection: socket %d added",fd);
 	DEBUG_PRINTF("CreateNewFogConnection: End\n");
 	return 0;
 }
@@ -610,7 +609,6 @@ int main(void)
 
 		for (i=1; i<fdfog_list.size();i++) { //Fog existing connections
 			if (FD_ISSET(fdfog_list[i],&fdsfog)){
-				DEBUG_PRINTF("Fog existing connections\n");
 
 				memset(buf,0,sizeof(buf));
 				numbytes = recv(fdfog_list[i], buf, MAXDATASIZE-1, 0);

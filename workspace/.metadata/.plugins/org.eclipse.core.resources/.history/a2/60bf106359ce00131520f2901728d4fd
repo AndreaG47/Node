@@ -610,7 +610,6 @@ int main(void)
 
 		for (i=1; i<fdfog_list.size();i++) { //Fog existing connections
 			if (FD_ISSET(fdfog_list[i],&fdsfog)){
-				DEBUG_PRINTF("Fog existing connections\n");
 
 				memset(buf,0,sizeof(buf));
 				numbytes = recv(fdfog_list[i], buf, MAXDATASIZE-1, 0);
