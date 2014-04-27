@@ -164,7 +164,7 @@ int RequestInformationfromotherFogs(int* Cloudfd){
 	return 0;
 }
 
-int RetrieveFogInfo(char buf[],int *n){
+int RetrieveFogInfo(char buf[]){
 	DEBUG_PRINTF("RetrieveFogInfo: Start\n");
 	int i;
 	struct FogDatabase temp;
@@ -172,7 +172,7 @@ int RetrieveFogInfo(char buf[],int *n){
 
 	Database.clear(); //TODO: Careful with this clear!!!
 
-	for(i=2;i<*n;)
+	for(i=2;i<sizeof(buf);)
 	{
 		memcpy(temp.ip,buf+i,sizeof(temp.ip));
 		i+=INET6_ADDRSTRLEN;
@@ -197,7 +197,7 @@ int RetrieveFogInfo(char buf[],int *n){
 
 }
 
-int SelectFogs(int* socketfd, char buf[],int* n){
+int SelectFogs(int* socketfd, char buf[]){
 
 	DEBUG_PRINTF("SelectFogs: Start\n");
 
@@ -210,7 +210,7 @@ int SelectFogs(int* socketfd, char buf[],int* n){
 	char name[1];
 	memset(name,0,1);
 	memcpy(name,NAME,1);
-	RetrieveFogInfo(buf,n);
+	RetrieveFogInfo(buf);
 
 	memcpy(temp+i,header,2);
 	i+=2;
@@ -567,7 +567,7 @@ int main(void)
 				case 'D':
 					switch (buf[1]) {
 					case 'A': //Receive from cloud list of available fogs to retrieve info
-						SelectFogs(&Cloudfd,buf,&numbytes);
+						SelectFogs(&Cloudfd,buf);
 						break;
 					}
 					break;

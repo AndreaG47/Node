@@ -567,7 +567,7 @@ int main(void)
 				case 'D':
 					switch (buf[1]) {
 					case 'A': //Receive from cloud list of available fogs to retrieve info
-						SelectFogs(&Cloudfd,buf,&numbytes);
+						SelectFogs(&Cloudfd,buf);
 						break;
 					}
 					break;
