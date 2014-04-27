@@ -28,22 +28,36 @@
 
 //----------------------------
 
-#define t
+//#define t
 #define G
 
-#ifdef G
+#define DEBUG
+//#define DEBUG_L2
+
+#ifdef t
 #define PORT "6000" // the port in the fog that node will be connecting to
 #define IPFOG "localhost" //ip of the fog
 #endif
-//#define DEBUG
+
+#ifdef G
+#define PORT "6000" // the port in the fog that node will be connecting to
+#define IPFOG "10.10.1.1" //ip of the fog
+#endif
+#ifdef M
+#define PORT "6000" // the port in the fog that node will be connecting to
+#define IPFOG "10.10.1.1" //ip of the fog
+#endif
+#ifdef N
+#define PORT "6000" // the port in the fog that node will be connecting to
+#define IPFOG "10.10.1.1" //ip of the fog
+#endif
 
 #define MAXDATASIZE 1500 // max number of bytes we can get at once
 #define MAXPACKETSIZE 1500
 
 #define MAXPUBLISHERPACKETSIZE 100
 
-//#define DEBUG
-//#define DEBUG_L2
+
 
 #ifdef DEBUG
 #define DEBUG_PRINTF(x)			printf(x)

@@ -14,7 +14,10 @@
 #define CLOUDT
 #define FOG
 
-#define t
+#define FORWARD_NODE
+#define FORWARD_FOG
+
+#define t   //Name of the local fog, options: M,N,G. t is for testing, don't use it on GENI
 
 #ifdef t
 #define CLOUDIP 		"localhost"
@@ -34,33 +37,47 @@
 
 
 #ifdef G
-#define CLOUDIP 		"192.168.1.2"
+#define CLOUDIP 		"192.168.2.2"
 #define CLOUDSERVERPORT "5005"
 #define NAME "G" //Name of the Fog device
 #define DATACONTENT "FOG-G" // Mask showing the data content
-#define IP "192.168.1.1"	//IP so other FOGs can connect to it
+#define IP "192.168.2.1"	//IP so other FOGs can connect to it
 #define FOGLISTENINGPORT 6000 //FOGSERVERPORT ad FOGLISTENINGPORT have to be the same
 #define FOGSERVERPORT "6000" //For node connections
 #define FOGSERVERPORT2 "7000" //For fog connections
 #define IP_FOG_G "localhost"
-#define IP_FOG_N "192.168.x.x"
-#define IP_FOG_M "192.168.x.x"
+#define IP_FOG_N "192.168.13.1"
+#define IP_FOG_M "192.168.14.2"
 
 
 #endif
 
 #ifdef N
-#define CLOUDIP 		"192.168.2.2"
+#define CLOUDIP 		"192.168.1.2"
 #define CLOUDSERVERPORT "5005"
 #define NAME "N" //Name of the Fog device
 #define DATACONTENT "FOG-N" // Mask showing the data content
-#define IP "192.168.2.1"	//IP so other FOGs can connect to it
+#define IP "192.168.1.1"	//IP so other FOGs can connect to it
 #define FOGLISTENINGPORT 6000 //FOGSERVERPORT ad FOGLISTENINGPORT have to be the same
 #define FOGSERVERPORT "6000"
 #define FOGSERVERPORT2 "7000"
-#define IP_FOG_G "localhost"
-#define IP_FOG_N "192.168.x.x"
-#define IP_FOG_M "192.168.x.x"
+#define IP_FOG_G "192.168.13.2"
+#define IP_FOG_N "localhost"
+#define IP_FOG_M "192.168.10.2"
+#endif
+
+#ifdef M
+#define CLOUDIP 		"192.168.3.1"
+#define CLOUDSERVERPORT "5005"
+#define NAME "N" //Name of the Fog device
+#define DATACONTENT "FOG-M" // Mask showing the data content
+#define IP "192.168.3.2"	//IP so other FOGs can connect to it
+#define FOGLISTENINGPORT 6000 //FOGSERVERPORT ad FOGLISTENINGPORT have to be the same
+#define FOGSERVERPORT "6000"
+#define FOGSERVERPORT2 "7000"
+#define IP_FOG_G "192.168.14.1"
+#define IP_FOG_N "192.168.10.1"
+#define IP_FOG_M "localhost"
 #endif
 
 #ifdef M
@@ -495,8 +512,9 @@ int main(void)
 					switch(buf[0])
 					{
 					case 'A':
-
+#ifdef FORWARD_NODE
 						ForwardPacket(buf,&fd_list[i],&numbytes);
+#endif
 						break;
 					case 'B':
 	//					ForwardPacket(buf,&fd_list[i],&numbytes);
@@ -607,9 +625,11 @@ int main(void)
 					//
 					switch(buf[0])
 					{
-//					case 'A':
-						//CaseA(&fd_list[i],buf,&numbytes);
-//						break;
+					case 'A':
+#ifdef FORWARD_FOG
+						ForwardPacket(buf,&fd_list[i],&numbytes);
+#endif
+						break;
 //					case 'B':
 //						//CaseB(&fd_list[i],buf,&numbytes);
 //						break;
@@ -630,7 +650,7 @@ int main(void)
 		gettimeofday(&CurrentTime,NULL);
 
 		if (ConnectionRequest==false){
-			if((TimeElapsed(&CurrentTime, &StartTime))>10000000){
+			if((TimeElapsed(&CurrentTime, &StartTime))>120000000){
 				DEBUG_PRINTF("Main: TimeElapsed\n");
 				RequestInformationfromotherFogs(&Cloudfd);
 				ConnectionRequest = true;
