@@ -100,8 +100,7 @@ int SubscriberInformationRequestAction(int* socketfd, char *temp){
 		 perror("SubscriberInformationRequestAction: send");
 	 }
 
-	 DEBUG_PRINTF3("SubscriberInformationRequestAction: temp: %d bytes: %s\n",a,temp);
-
+	 DEBUG_PRINTF2("SubscriberInformationRequestAction: temp:%s\n",temp);
 	 DEBUG_PRINTF("SubscriberInformationRequestAction: End\n");
 	 return 0;
 }

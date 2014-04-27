@@ -1,6 +1,31 @@
-14:23:56 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
+15:07:46 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
 make all 
-make: Nothing to be done for `all'.
+Building file: ../fog.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"fog.d" -MT"fog.d" -o "fog.o" "../fog.cpp"
+../fog.cpp: In function ‘int ForwardPacket(char*, int*, int*)’:
+../fog.cpp:147:2: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:147:2: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp: In function ‘int RetrieveFogInfo(char*)’:
+../fog.cpp:174:22: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp: In function ‘int SelectFogs(int*, char*)’:
+../fog.cpp:214:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp: In function ‘int main()’:
+../fog.cpp:550:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:550:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:552:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:552:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:554:47: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘uint64_t {aka long long unsigned int}’ [-Wformat]
+../fog.cpp:594:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:374:30: warning: unused variable ‘new_fd’ [-Wunused-variable]
+../fog.cpp:376:7: warning: unused variable ‘port2’ [-Wunused-variable]
+Finished building: ../fog.cpp
+ 
+Building target: ECE640
+Invoking: Cross G++ Linker
+g++  -o "ECE640"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./fog.o ./test1.o   
+Finished building target: ECE640
+ 
 
-14:23:57 Build Finished (took 79ms)
+15:07:47 Build Finished (took 530ms)
 
