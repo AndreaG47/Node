@@ -165,7 +165,6 @@ int RequestInformationfromotherFogs(int* Cloudfd){
 }
 
 int RetrieveFogInfo(char buf[]){
-	DEBUG_PRINTF("RetrieveFogInfo: Start\n");
 	int i;
 	struct FogDatabase temp;
 	memset(&temp,0,sizeof(temp));
@@ -192,7 +191,7 @@ int RetrieveFogInfo(char buf[]){
 		Database.push_back(temp);
 	}
 
-	DEBUG_PRINTF("RetrieveFogInfo: End\n");
+
 	return 0;
 
 }
