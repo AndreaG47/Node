@@ -271,6 +271,7 @@ int CreateNewFogConnection(char buf[], vector<int> *FogFds ){
 	DEBUG_PRINTF4("CreateNewFogConnection: Connect to %s : ip: %s, port %s\n",name,ip,port);
 	ClientConnectionInit(&fd,ip,port);
 	FogFds->push_back(fd);
+
 	DEBUG_PRINTF("CreateNewFogConnection: End\n");
 	return 0;
 }

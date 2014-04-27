@@ -268,9 +268,13 @@ int CreateNewFogConnection(char buf[], vector<int> *FogFds ){
 		memcpy(ip,IP_FOG_N,INET6_ADDRSTRLEN);
 		break;
 	}
-	DEBUG_PRINTF4("CreateNewFogConnection: Connect to %s : ip: %s, port %s\n",name,ip,port);
-	ClientConnectionInit(&fd,ip,port);
-	FogFds->push_back(fd);
+	int s=strcmp(name,NAME);
+
+	if ((s!=0)){
+		DEBUG_PRINTF4("CreateNewFogConnection: Connect to %s : ip: %s, port %s\n",name,ip,port);
+		ClientConnectionInit(&fd,ip,port);
+		FogFds->push_back(fd);
+	}
 	DEBUG_PRINTF("CreateNewFogConnection: End\n");
 	return 0;
 }

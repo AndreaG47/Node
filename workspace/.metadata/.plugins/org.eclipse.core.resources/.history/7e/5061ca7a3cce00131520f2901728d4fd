@@ -50,8 +50,6 @@ int CreateFogDatabasePacket(char *buf, int* numbytes){
 
 	memcpy(buf+a,header,2);
 	a+=2;
-	DEBUG_PRINTF("CreateFogDatabasePacket: List ");
-
 
 	for(i=0;i<Database.size();i++)
 	{
@@ -63,8 +61,6 @@ int CreateFogDatabasePacket(char *buf, int* numbytes){
 
 		memcpy(buf+a,Database[i].name,sizeof(Database[i].name));
 		a+=sizeof(Database[i].name);
-
-		DEBUG_PRINTF2(" %s",Database[i].name);
 
 	}
 
@@ -99,7 +95,7 @@ int SubscriberInformationRequestAction(int* socketfd, char *temp){
 		 perror("SubscriberInformationRequestAction: send");
 	 }
 
-	 DEBUG_PRINTF2("SubscriberInformationRequestAction: temp:%s\n",temp);
+	DEBUG_PRINTF2("SubscriberInformationRequestAction: temp:%s\n",temp);
 	 DEBUG_PRINTF("SubscriberInformationRequestAction: End\n");
 	 return 0;
 }
