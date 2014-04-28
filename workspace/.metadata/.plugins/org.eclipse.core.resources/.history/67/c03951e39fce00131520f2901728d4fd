@@ -658,9 +658,7 @@ int main(void)
 					switch(buf[0])
 					{
 					case 'A':
-#ifdef FORWARD_FOG
 						ForwardPacket(buf,&(fdfog_list[i]),&numbytes,2);
-#endif
 						break;
 					default:
 						DEBUG_PRINTF("Main: Fog connections: Packet doesn't match with the standard cases\n");
@@ -739,7 +737,6 @@ int main(void)
 
 	return 0;
 }
-
 
 
 
