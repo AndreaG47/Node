@@ -260,7 +260,7 @@ int main(int argc, char *argv[])
 					DEBUG_PRINTF3("Main: CurrentTime = %u.%06u\n",CurrentTime.tv_sec, CurrentTime.tv_usec);
 					elapsed=TimeElapsed(&CurrentTime, &RecvTime);
 					DEBUG_PRINTF2("Main: Elapsed RTT : %llu us\n", elapsed);
-					printf("1 \t%llu\n", elapsed);
+					printf("1 %llu\n", elapsed);
 
 					break;
 				}

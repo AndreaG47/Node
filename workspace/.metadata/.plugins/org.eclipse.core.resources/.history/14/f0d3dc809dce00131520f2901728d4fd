@@ -150,7 +150,7 @@ int ForwardPacket(char buf[], int *fd, int *size, int src)
 	if((numbytes=send(*fd,buf,*size,0))==-1)
 		DEBUG_PRINTF("ForwardPacket: Send error\n");
 	DEBUG_PRINTF3("ForwardPacket: Size sent to %d= %d\n",numbytes,src);
-	printf("%d \t%u.%06u\n",src, now.tv_sec, now.tv_usec);
+	printf("%d %u.%06u\n",src, now.tv_sec, now.tv_usec);
 	DEBUG_PRINTF("ForwardPacket: End\n");
 
 
@@ -696,7 +696,7 @@ int main(void)
 						DEBUG_PRINTF3("Main: CurrentTime = %u.%06u\n",CurrentTime.tv_sec, CurrentTime.tv_usec);
 						elapsed=TimeElapsed(&CurrentTime, &RecvTime);
 						//printf("Main: Elapsed : %llu us\n", elapsed);
-						printf("2 \t%u.%06u \t%u.%06u \t%llu\n",CurrentTime.tv_sec, CurrentTime.tv_usec,RecvTime.tv_sec, RecvTime.tv_usec, elapsed);
+						printf("2 %u.%06u \t%u.%06u \t%llu\n",CurrentTime.tv_sec, CurrentTime.tv_usec,RecvTime.tv_sec, RecvTime.tv_usec, elapsed);
 
 					}
 				}
