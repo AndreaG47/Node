@@ -2016,3 +2016,94 @@ Finished building target: ECE640
 01:34:34 **** Incremental Build of configuration Debug for project ECE640Client ****
 make all 
 make: Nothing to be done for `all'.
+02:02:19 **** Incremental Build of configuration Debug for project ClientTest ****
+make all 
+make: Nothing to be done for `all'.
+02:02:20 **** Incremental Build of configuration Debug for project Cloud ****
+make all 
+make: Nothing to be done for `all'.
+02:02:20 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
+make all 
+Building file: ../fog.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"fog.d" -MT"fog.d" -o "fog.o" "../fog.cpp"
+../fog.cpp: In function ‘int ForwardPacket(char*, int*, int*, int)’:
+../fog.cpp:147:2: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:147:2: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:153:47: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:153:47: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:153:47: warning: format ‘%u’ expects a matching ‘unsigned int’ argument [-Wformat]
+../fog.cpp: In function ‘int SelectFogs(int*, char*, int*)’:
+../fog.cpp:224:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp: In function ‘int main()’:
+../fog.cpp:506:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:576:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:576:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:578:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:578:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:581:128: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:581:128: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:581:128: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 4 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:581:128: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 5 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:605:33: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:627:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:633:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:670:36: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:694:7: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:694:7: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:696:7: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:696:7: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:699:127: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:699:127: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:699:127: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 4 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:699:127: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 5 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:729:38: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:389:30: warning: unused variable ‘new_fd’ [-Wunused-variable]
+Finished building: ../fog.cpp
+ 
+Building target: ECE640
+Invoking: Cross G++ Linker
+g++  -o "ECE640"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./fog.o ./test1.o   
+Finished building target: ECE640
+ 
+02:02:20 **** Incremental Build of configuration Debug for project ECE640Client ****
+make all 
+Building file: ../client.c
+Invoking: GCC C Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"client.d" -MT"client.d" -o "client.o" "../client.c"
+../client.c: In function ‘main’:
+../client.c:258:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t’ [-Wformat]
+../client.c:258:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t’ [-Wformat]
+../client.c:260:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t’ [-Wformat]
+../client.c:260:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t’ [-Wformat]
+Finished building: ../client.c
+ 
+Building target: ECE640Client
+Invoking: GCC C++ Linker
+g++  -o "ECE640Client"  ./client.o   
+Finished building target: ECE640Client
+ 
+02:02:24 **** Incremental Build of configuration Debug for project ClientTest ****
+make all 
+make: Nothing to be done for `all'.
+02:02:24 **** Incremental Build of configuration Debug for project Cloud ****
+make all 
+make: Nothing to be done for `all'.
+02:02:25 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
+make all 
+make: Nothing to be done for `all'.
+02:02:25 **** Incremental Build of configuration Debug for project ECE640Client ****
+make all 
+make: Nothing to be done for `all'.
+02:02:28 **** Incremental Build of configuration Debug for project ClientTest ****
+make all 
+make: Nothing to be done for `all'.
+02:02:28 **** Incremental Build of configuration Debug for project Cloud ****
+make all 
+make: Nothing to be done for `all'.
+02:02:28 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
+make all 
+make: Nothing to be done for `all'.
+02:02:28 **** Incremental Build of configuration Debug for project ECE640Client ****
+make all 
+make: Nothing to be done for `all'.

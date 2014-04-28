@@ -696,7 +696,7 @@ int main(void)
 						DEBUG_PRINTF3("Main: CurrentTime = %u.%06u\n",CurrentTime.tv_sec, CurrentTime.tv_usec);
 						elapsed=TimeElapsed(&CurrentTime, &RecvTime);
 						//printf("Main: Elapsed : %llu us\n", elapsed);
-						printf("2 %u.%06u \t%u.%06u \t%llu\n",CurrentTime.tv_sec, CurrentTime.tv_usec,RecvTime.tv_sec, RecvTime.tv_usec, elapsed);
+						printf("2 %u.%06u \t%u.%06u \t%llu",CurrentTime.tv_sec, CurrentTime.tv_usec,RecvTime.tv_sec, RecvTime.tv_usec, elapsed);
 
 					}
 				}
