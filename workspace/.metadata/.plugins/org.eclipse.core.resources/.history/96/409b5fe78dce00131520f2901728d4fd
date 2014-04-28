@@ -724,9 +724,9 @@ int main(void)
 
 
 #ifdef FOG
-			if (sendtofog && (fdfogclient_list.size()>1)){
-				for (i=1;i<fdfogclient_list.size();i++){
-					PacketGeneration(&(fdfogclient_list[i]),&TimeA,&TimeB,&TimeC);
+			if (sendtofog && (fdfog_list.size()>1)){
+				for (i=1;i<fdfog_list.size();i++){
+					PacketGeneration(&(fdfog_list[i]),&TimeA,&TimeB,&TimeC);
 
 				}
 			}
