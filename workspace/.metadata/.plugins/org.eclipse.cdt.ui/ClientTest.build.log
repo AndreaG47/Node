@@ -1,6 +1,6 @@
-02:02:28 **** Incremental Build of configuration Debug for project ClientTest ****
+02:17:42 **** Incremental Build of configuration Debug for project ClientTest ****
 make all 
 make: Nothing to be done for `all'.
 
-02:02:28 Build Finished (took 106ms)
+02:17:42 Build Finished (took 96ms)
 

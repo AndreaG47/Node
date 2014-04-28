@@ -4,7 +4,7 @@
  *  Created on: Apr 14, 2014
  *      Author: Andrea Gil
  */
-//#define DEBUG
+#define DEBUG
 #define G  //Name of the local fog, options: M,N,G. t is for testing, don't use it on GENI
 
 #include "common.h"

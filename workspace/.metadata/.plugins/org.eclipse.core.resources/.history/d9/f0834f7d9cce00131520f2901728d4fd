@@ -6,9 +6,9 @@
  */
 
 
-//#define DEBUG
+#define DEBUG
 #define FORWARD
-//#define test
+#define test
 #ifdef test
 #include "/home/andrea/workspace/ECE640/common.h"
 #else
@@ -259,7 +259,7 @@ int ForwardPacket(char buf[], int *fd, int *size)
 	DEBUG_PRINTF("ForwardPacket: Start\n");
 	timeval now;
 	memcpy(&now,buf+1,sizeof(now));
-	printf("0 \t%u.%06u\n",now.tv_sec, now.tv_usec);
+	printf("%u.%06u\n",now.tv_sec, now.tv_usec);
 		if(send(*fd,buf,*size,0)==-1)
 		DEBUG_PRINTF("ForwardPacket: Send error\n");
 	DEBUG_PRINTF("ForwardPacket: End\n");

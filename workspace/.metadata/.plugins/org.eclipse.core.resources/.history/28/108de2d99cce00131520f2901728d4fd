@@ -19,8 +19,8 @@
 
 
 #define G
-//#define DEBUG
-//#define DEBUG_L2
+#define DEBUG
+#define DEBUG_L2
 
 //-------Modify Packet Parameters----
 #define PACKETPERIOD_A 3000000
