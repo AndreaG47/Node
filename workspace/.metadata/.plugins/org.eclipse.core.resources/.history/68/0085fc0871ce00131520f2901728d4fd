@@ -13,7 +13,7 @@
 #define G  //Name of the local fog, options: M,N,G. t is for testing, don't use it on GENI
 
 #define CLOUD
-#define CLOUDT
+//#define CLOUDT
 #define FOG
 
 #define FORWARD_NODE

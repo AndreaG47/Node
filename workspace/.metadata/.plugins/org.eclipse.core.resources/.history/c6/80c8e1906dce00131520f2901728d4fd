@@ -13,7 +13,7 @@
 #define G  //Name of the local fog, options: M,N,G. t is for testing, don't use it on GENI
 
 #define CLOUD
-#define CLOUDT
+//#define CLOUDT
 #define FOG
 
 #define FORWARD_NODE
@@ -116,7 +116,7 @@ int PacketGeneration(int *sockfd,struct timeval *TimeA, struct timeval* TimeB, s
 		memcpy(PacketBuffer,"A",1);
 		memcpy(PacketBuffer+1,&CurrentTime,sizeof(CurrentTime));
 
-		if ((send(*sockfd,PacketBuffer, PACKETsize_A, 0)) == -1)
+		if (send(*sockfd,PacketBuffer, PACKETsize_A, 0) == -1)
 			perror("send");
 		DEBUG_PRINTF2("PacketGeneration:Packet A sent to socket %d\n",*sockfd);
 		*TimeA=CurrentTime;
@@ -584,16 +584,15 @@ int main(void)
 					}
 					break;
 				case 'E':
-					switch (buf[1])
-					{
+					switch (buf[1]){
 					case 'A': //Receive from cloud command to connect to other fog
 						DEBUG_PRINTF("Main: Fog: Case EA\n");
 						CreateNewFogConnection(buf,&fdfog_list);
 						DEBUG_PRINTF2("Main: Fog: New socket %d\n",(fdfog_list.back()));
 						DEBUG_PRINTF("fdfog_list:\n");
-						for(i=0;i<fdfog_list.size();i++)
+						for(i=0;i<fdfog_list.size();i++){
 							DEBUG_PRINTF2("\t%d\n",fdfog_list[i]);
-						sendtofog=true;
+						}
 						break;
 					}
 					break;
@@ -611,7 +610,7 @@ int main(void)
 		if (FD_ISSET(fogfd,&fdsfog)){  //Node accept new connections
 					DEBUG_PRINTF("Main: New incoming fog connection");
 					IncomingNewConnection(&fogfd,&fdsfog_back,&fdfog_list);
-					//sendtofog=true;
+					sendtofog=true;
 					DEBUG_PRINTF("fdfog_list:\n");
 					for(i=0;i<fdfog_list.size();i++){
 						DEBUG_PRINTF2("\t%d\n",fdfog_list[i]);

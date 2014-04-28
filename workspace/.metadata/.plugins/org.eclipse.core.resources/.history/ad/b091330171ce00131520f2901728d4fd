@@ -13,7 +13,7 @@
 #define G  //Name of the local fog, options: M,N,G. t is for testing, don't use it on GENI
 
 #define CLOUD
-#define CLOUDT
+//#define CLOUDT
 #define FOG
 
 #define FORWARD_NODE
@@ -611,7 +611,7 @@ int main(void)
 		if (FD_ISSET(fogfd,&fdsfog)){  //Node accept new connections
 					DEBUG_PRINTF("Main: New incoming fog connection");
 					IncomingNewConnection(&fogfd,&fdsfog_back,&fdfog_list);
-					//sendtofog=true;
+					sendtofog=true;
 					DEBUG_PRINTF("fdfog_list:\n");
 					for(i=0;i<fdfog_list.size();i++){
 						DEBUG_PRINTF2("\t%d\n",fdfog_list[i]);
