@@ -666,7 +666,7 @@ int main(void)
 			}
 		}
 
-		for (i=1;i<fdfogclient_list.size();i++){ //Fog existing outgoing connections
+		for (i=0;i<fdfogclient_list.size();i++){ //Fog existing outgoing connections
 			if (FD_ISSET(fdfogclient_list[i],&fdsfogclient)){
 
 				memset(buf,0,sizeof(buf));

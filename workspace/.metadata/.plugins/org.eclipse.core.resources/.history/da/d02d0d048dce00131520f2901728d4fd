@@ -442,7 +442,6 @@ int main(void)
 
 	fd_list.push_back(sockfd);
 	fdfog_list.push_back(fogfd);
-	fdfogclient_list.push_back(0);
 
 	char buf[MAXDATASIZE];
 	int numbytes, max_fd, max_fdfog, max_fdfogclient,i;
@@ -465,7 +464,7 @@ int main(void)
 
 	DEBUG_PRINTF2("Main: Max_fd= %d\n",max_fd);
 	DEBUG_PRINTF2("Main: Max_fdfog= %d\n",max_fdfog);
-	DEBUG_PRINTF2("Main: Max_fdfogclient= %d\n",max_fdfogclient);
+	DEBUG_PRINTF2("Main: Max_fdfog= %d\n",max_fdfogclient);
 	DEBUG_PRINTF("Main: Enter to main while loop\n");
 
 	bool sendtofog=false;
@@ -629,7 +628,7 @@ int main(void)
 					DEBUG_PRINTF("Main: Continue\n");
 				}
 
-		for (i=1; i<fdfog_list.size();i++) { //Fog existing incoming connections
+		for (i=0; i<fdfog_list.size();i++) { //Fog existing incoming connections
 			if (FD_ISSET(fdfog_list[i],&fdsfog)){
 				DEBUG_PRINTF2("Fog existing connections: socket %d \n",fdfog_list[i]);
 
@@ -666,7 +665,7 @@ int main(void)
 			}
 		}
 
-		for (i=1;i<fdfogclient_list.size();i++){ //Fog existing outgoing connections
+		for (i=0;i<fdfogclient_list.size();i++){ //Fog existing outgoing connections
 			if (FD_ISSET(fdfogclient_list[i],&fdsfogclient)){
 
 				memset(buf,0,sizeof(buf));
