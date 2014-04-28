@@ -607,7 +607,6 @@ int main(void)
 					DEBUG_PRINTF("Main: New incoming fog connection");
 					IncomingNewConnection(&fogfd,&fdsfog_back,&fdfog_list);
 					sendtofog=true;
-					DEBUG_PRINTF("Main: Continue\n");
 				}
 
 		if((FD_ISSET(5,&fdsfog))){
