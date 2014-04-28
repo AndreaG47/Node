@@ -1,4 +1,4 @@
-18:40:30 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
+20:31:04 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
 make all 
 Building file: ../fog.cpp
 Invoking: Cross G++ Compiler
@@ -14,10 +14,12 @@ g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"fog.d" -MT"fog.d" -o "fog.o
 ../fog.cpp:568:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
 ../fog.cpp:568:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
 ../fog.cpp:570:47: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘uint64_t {aka long long unsigned int}’ [-Wformat]
-../fog.cpp:616:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp:685:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:618:29: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:622:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:690:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
 ../fog.cpp:388:30: warning: unused variable ‘new_fd’ [-Wunused-variable]
 ../fog.cpp:390:7: warning: unused variable ‘port2’ [-Wunused-variable]
+../fog.cpp:423:7: warning: unused variable ‘ConnectionRequest’ [-Wunused-variable]
 Finished building: ../fog.cpp
  
 Building target: ECE640
@@ -26,5 +28,5 @@ g++  -o "ECE640"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./fog.
 Finished building target: ECE640
  
 
-18:40:31 Build Finished (took 534ms)
+20:31:04 Build Finished (took 532ms)
 

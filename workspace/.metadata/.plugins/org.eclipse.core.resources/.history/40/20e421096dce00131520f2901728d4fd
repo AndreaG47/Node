@@ -589,10 +589,6 @@ int main(void)
 						DEBUG_PRINTF("Main: Fog: Case EA\n");
 						CreateNewFogConnection(buf,&fdfog_list);
 						DEBUG_PRINTF2("Main: Fog: New socket %d\n",(fdfog_list.back()));
-						DEBUG_PRINTF("fdfog_list:\n");
-						for(i=0;i<fdfog_list.size();i++){
-							DEBUG_PRINTF2("\t%d\n",fdfog_list[i]);
-						}
 						break;
 					}
 					break;
@@ -611,19 +607,17 @@ int main(void)
 					DEBUG_PRINTF("Main: New incoming fog connection");
 					IncomingNewConnection(&fogfd,&fdsfog_back,&fdfog_list);
 					sendtofog=true;
-					DEBUG_PRINTF("fdfog_list:\n");
-					for(i=0;i<fdfog_list.size();i++){
-						DEBUG_PRINTF2("\t%d\n",fdfog_list[i]);
-					}
 					DEBUG_PRINTF("Main: Continue\n");
-
 				}
 
 		if((FD_ISSET(5,&fdsfog))){
 			DEBUG_PRINTF("TEST\n");
 		}
 
-
+		DEBUG_PRINTF("fdfog_list:\n");
+		for(i=0;i<fdfog_list.size();i++){
+			DEBUG_PRINTF2("\t%d\n",fdfog_list[i]);
+		}
 
 		for (i=0; i<fdfog_list.size();i++) { //Fog existing connections
 			if (FD_ISSET(fdfog_list[i],&fdsfog)){
