@@ -240,7 +240,7 @@ int SelectFogs(int* socketfd, char buf[],int* n){
 	return 0;
 }
 
-int CreateNewFogConnection(char buf[], vector<int> *FogFds, fd_set *fdset){
+int CreateNewFogConnection(char buf[], vector<int> *FogFds ){
 
 	DEBUG_PRINTF("CreateNewFogConnection: Start\n");
 	uint32_t a;
@@ -282,7 +282,6 @@ int CreateNewFogConnection(char buf[], vector<int> *FogFds, fd_set *fdset){
 	DEBUG_PRINTF4("CreateNewFogConnection: Connect to %s : ip: %s, port %s\n",name,ip,port);
 	ClientConnectionInit(&fd,ip,port);
 	FogFds->push_back(fd);
-	FD_SET(fd,fdset);
 	DEBUG_PRINTF2("CreateNewFogConnection: socket %d added",fd);
 	DEBUG_PRINTF("CreateNewFogConnection: End\n");
 	return 0;
@@ -597,7 +596,7 @@ int main(void)
 					{
 					case 'A': //Receive from cloud command to connect to other fog
 						DEBUG_PRINTF("Main: Fog: Case EA\n");
-						CreateNewFogConnection(buf,&fdfogclient_list, &fdsfogclient_back);
+						CreateNewFogConnection(buf,&fdfog_list);
 						DEBUG_PRINTF2("Main: Fog: New socket %d\n",(fdfog_list.back()));
 						DEBUG_PRINTF("fdfog_list:\n");
 						for(i=0;i<fdfog_list.size();i++)
@@ -665,6 +664,7 @@ int main(void)
 			}
 		}
 
+
 		for (i=0;i<fdfogclient_list.size();i++){ //Fog existing outgoing connections
 			if (FD_ISSET(fdfogclient_list[i],&fdsfogclient)){
 
@@ -683,21 +683,11 @@ int main(void)
 				}
 				else {
 					buf[numbytes] = '\0';
-					DEBUG_PRINTF3("Main: fog outgoing connections: Received %d bytes: '%s'\n",numbytes,buf);
+					DEBUG_PRINTF3("Main: Cloud incoming connections: Received %d bytes: '%s'\n",numbytes,buf);
 
-					switch(buf[0]){
-					case 'A':
-						DEBUG_PRINTF3("Main: Received %d bytes: '%s'\n",numbytes,buf);
-						memcpy(&RecvTime,buf+1,sizeof(RecvTime));
-						DEBUG_PRINTF3("Main: RecvTime = %u.%06u\n",RecvTime.tv_sec, RecvTime.tv_usec);
-						gettimeofday(&CurrentTime,NULL);
-						DEBUG_PRINTF3("Main: CurrentTime = %u.%06u\n",CurrentTime.tv_sec, CurrentTime.tv_usec);
-						elapsed=TimeElapsed(&CurrentTime, &RecvTime);
-			//			printf("Main: Elapsed : %" PRIu64 "us\n", elapsed);
 
-					}
-				}
 			}
+
 		}
 
 #endif

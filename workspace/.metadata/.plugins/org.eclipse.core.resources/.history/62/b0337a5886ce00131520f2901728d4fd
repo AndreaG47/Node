@@ -240,7 +240,7 @@ int SelectFogs(int* socketfd, char buf[],int* n){
 	return 0;
 }
 
-int CreateNewFogConnection(char buf[], vector<int> *FogFds, fd_set *fdset){
+int CreateNewFogConnection(char buf[], vector<int> *FogFds ){
 
 	DEBUG_PRINTF("CreateNewFogConnection: Start\n");
 	uint32_t a;
@@ -282,7 +282,6 @@ int CreateNewFogConnection(char buf[], vector<int> *FogFds, fd_set *fdset){
 	DEBUG_PRINTF4("CreateNewFogConnection: Connect to %s : ip: %s, port %s\n",name,ip,port);
 	ClientConnectionInit(&fd,ip,port);
 	FogFds->push_back(fd);
-	FD_SET(fd,fdset);
 	DEBUG_PRINTF2("CreateNewFogConnection: socket %d added",fd);
 	DEBUG_PRINTF("CreateNewFogConnection: End\n");
 	return 0;
@@ -425,16 +424,15 @@ int main(void)
 	struct timeval tv;
 	tv.tv_sec=tv.tv_usec=0;
 
-	vector<int> fd_list, fdfog_list, fdfogclient_list;
+	vector<int> fd_list, fdfog_list;
 	fd_list.clear();
-	fd_set fds, fds_back, fdscloud, fdscloud_back, fdsfog, fdsfog_back, fdsfogclient, fdsfogclient_back;
+	fd_set fds, fds_back, fdscloud, fdscloud_back, fdsfog, fdsfog_back;
 
 
 	//Add sockets to file descriptor set and to vector of fd.
 	FD_ZERO(&fds_back);
 	FD_ZERO(&fdscloud_back);
 	FD_ZERO(&fdsfog_back);
-	FD_ZERO(&fdsfogclient_back);
 
 	FD_SET(sockfd,&fds_back);
 	FD_SET(Cloudfd,&fdscloud_back);
@@ -444,7 +442,7 @@ int main(void)
 	fdfog_list.push_back(fogfd);
 
 	char buf[MAXDATASIZE];
-	int numbytes, max_fd, max_fdfog, max_fdfogclient,i;
+	int numbytes, max_fd, max_fdfog, i;
 
 	struct timeval CurrentTime, StartTime, CloudTime, FogTime;
 	gettimeofday(&CurrentTime,NULL);
@@ -460,11 +458,9 @@ int main(void)
 	DEBUG_PRINTF2("Main: fd_list.back()= %d\n",fd_list.back());
 	max_fd=*max_element(fd_list.begin(),fd_list.end());
 	max_fdfog=*max_element(fdfog_list.begin(),fdfog_list.end());
-	max_fdfogclient=*max_element(fdfogclient_list.begin(),fdfogclient_list.end());
 
 	DEBUG_PRINTF2("Main: Max_fd= %d\n",max_fd);
 	DEBUG_PRINTF2("Main: Max_fdfog= %d\n",max_fdfog);
-	DEBUG_PRINTF2("Main: Max_fdfog= %d\n",max_fdfogclient);
 	DEBUG_PRINTF("Main: Enter to main while loop\n");
 
 	bool sendtofog=false;
@@ -477,22 +473,17 @@ int main(void)
 		FD_ZERO(&fds);
 		FD_ZERO(&fdsfog);
 		FD_ZERO(&fdscloud);
-		FD_ZERO(&fdsfogclient);
 
 		fds=fds_back;
 		fdsfog=fdsfog_back;
 		fdscloud=fdscloud_back;
-		fdsfogclient=fdsfogclient_back;
-
 
 		max_fd=*max_element(fd_list.begin(),fd_list.end());
 		max_fdfog=*max_element(fdfog_list.begin(),fdfog_list.end());
-		max_fdfogclient=*max_element(fdfogclient_list.begin(),fdfogclient_list.end());
 
 		select(max_fd+1,&fds,NULL,NULL,&tv);
 		select(max_fdfog+1,&fdsfog,NULL,NULL,&tv);
 		select(Cloudfd+1,&fdscloud,NULL,NULL,&tv);
-		select(max_fdfogclient+1,&fdsfogclient,NULL,NULL,&tv);
 
 		//Nodes
 #ifdef NODE
@@ -597,7 +588,7 @@ int main(void)
 					{
 					case 'A': //Receive from cloud command to connect to other fog
 						DEBUG_PRINTF("Main: Fog: Case EA\n");
-						CreateNewFogConnection(buf,&fdfogclient_list, &fdsfogclient_back);
+						CreateNewFogConnection(buf,&fdfog_list);
 						DEBUG_PRINTF2("Main: Fog: New socket %d\n",(fdfog_list.back()));
 						DEBUG_PRINTF("fdfog_list:\n");
 						for(i=0;i<fdfog_list.size();i++)
@@ -626,14 +617,21 @@ int main(void)
 						DEBUG_PRINTF2("\t%d\n",fdfog_list[i]);
 					}
 					DEBUG_PRINTF("Main: Continue\n");
+
 				}
 
-		for (i=0; i<fdfog_list.size();i++) { //Fog existing incoming connections
+		if((FD_ISSET(5,&fdsfog))){
+			DEBUG_PRINTF("TEST\n");
+		}
+
+
+
+		for (i=0; i<fdfog_list.size();i++) { //Fog existing connections
 			if (FD_ISSET(fdfog_list[i],&fdsfog)){
 				DEBUG_PRINTF2("Fog existing connections: socket %d \n",fdfog_list[i]);
 
 				memset(buf,0,sizeof(buf));
-				numbytes = recv(fdfog_list[i], buf, MAXPACKETSIZE-1, 0);
+				numbytes = recv(fdfog_list[i], buf, MAXDATASIZE-1, 0);
 
 				if (numbytes == -1) {
 					    perror("Main: Fog existing connections: recv");
@@ -656,50 +654,22 @@ int main(void)
 					switch(buf[0])
 					{
 					case 'A':
+#ifdef FORWARD_FOG
 						ForwardPacket(buf,&(fdfog_list[i]),&numbytes);
+#endif
 						break;
+//					case 'B':
+//						//CaseB(&fd_list[i],buf,&numbytes);
+//						break;
+//					case 'C':
+//						//CaseC(&fd_list[i],buf,&numbytes);
+//						break;
 					default:
 						DEBUG_PRINTF("Main: Fog connections: Packet doesn't match with the standard cases\n");
 					}
 				}
 			}
 		}
-
-		for (i=0;i<fdfogclient_list.size();i++){ //Fog existing outgoing connections
-			if (FD_ISSET(fdfogclient_list[i],&fdsfogclient)){
-
-				memset(buf,0,sizeof(buf));
-				numbytes = recv(fdfogclient_list[i], buf, MAXDATASIZE-1, 0);
-
-				if (numbytes == -1) {
-					    perror("Main:Fog outgoing connection: recv");
-					    //exit(1); //TODO: Remove this exits because it's causing that the server disconnects
-					}
-				if (numbytes==0){
-					FD_CLR(fdfogclient_list[i],&fdsfogclient_back);
-					close(fdfogclient_list[i]);
-					fd_list.erase(fdfogclient_list.begin()+i);
-
-				}
-				else {
-					buf[numbytes] = '\0';
-					DEBUG_PRINTF3("Main: fog outgoing connections: Received %d bytes: '%s'\n",numbytes,buf);
-
-					switch(buf[0]){
-					case 'A':
-						DEBUG_PRINTF3("Main: Received %d bytes: '%s'\n",numbytes,buf);
-						memcpy(&RecvTime,buf+1,sizeof(RecvTime));
-						DEBUG_PRINTF3("Main: RecvTime = %u.%06u\n",RecvTime.tv_sec, RecvTime.tv_usec);
-						gettimeofday(&CurrentTime,NULL);
-						DEBUG_PRINTF3("Main: CurrentTime = %u.%06u\n",CurrentTime.tv_sec, CurrentTime.tv_usec);
-						elapsed=TimeElapsed(&CurrentTime, &RecvTime);
-			//			printf("Main: Elapsed : %" PRIu64 "us\n", elapsed);
-
-					}
-				}
-			}
-		}
-
 #endif
 
 #ifdef CLOUDT

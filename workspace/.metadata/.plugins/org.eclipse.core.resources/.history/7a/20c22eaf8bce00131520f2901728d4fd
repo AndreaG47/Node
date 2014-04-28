@@ -597,7 +597,7 @@ int main(void)
 					{
 					case 'A': //Receive from cloud command to connect to other fog
 						DEBUG_PRINTF("Main: Fog: Case EA\n");
-						CreateNewFogConnection(buf,&fdfogclient_list, &fdsfogclient_back);
+						CreateNewFogConnection(buf,&fdfogclient_list, fdsfogclient_back);
 						DEBUG_PRINTF2("Main: Fog: New socket %d\n",(fdfog_list.back()));
 						DEBUG_PRINTF("fdfog_list:\n");
 						for(i=0;i<fdfog_list.size();i++)
