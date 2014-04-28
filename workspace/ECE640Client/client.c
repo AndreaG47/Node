@@ -17,22 +17,21 @@
 #define _STDC_FORMAT_MACROS
 #include <inttypes.h>
 
+
+#define G
+#define DEBUG
+#define DEBUG_L2
+
 //-------Modify Packet Parameters----
 #define PACKETPERIOD_A 3000000
 #define PACKETPERIOD_B 100000000000
 #define PACKETPERIOD_C 500000000000
 
-#define PACKETsize_A 999
+#define PACKETsize_A 250
 #define PACKETsize_B 50
 #define PACKETsize_C 50
 
 //----------------------------
-
-//#define t
-#define G
-
-#define DEBUG
-//#define DEBUG_L2
 
 #ifdef t
 #define PORT "6000" // the port in the fog that node will be connecting to
@@ -260,7 +259,8 @@ int main(int argc, char *argv[])
 					gettimeofday(&CurrentTime,NULL);
 					DEBUG_PRINTF3("Main: CurrentTime = %u.%06u\n",CurrentTime.tv_sec, CurrentTime.tv_usec);
 					elapsed=TimeElapsed(&CurrentTime, &RecvTime);
-					printf("Main: Elapsed : %" PRIu64 "us\n", elapsed);
+					DEBUG_PRINTF2("Main: Elapsed RTT : %llu us\n", elapsed);
+					printf("%llu\n", elapsed);
 
 					break;
 				}

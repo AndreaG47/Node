@@ -5,21 +5,21 @@
  *      Author: Andrea Gil
  */
 #define DEBUG
+#define G  //Name of the local fog, options: M,N,G. t is for testing, don't use it on GENI
 
 #include "common.h"
 #define _STDC_FORMAT_MACROS
 #include <inttypes.h>
 
-#define G  //Name of the local fog, options: M,N,G. t is for testing, don't use it on GENI
-
 #define CLOUD
 #define CLOUDT
 #define FOG
+#define NODE
 
 #define FORWARD_NODE
 #define FORWARD_FOG
 
-
+//---------Address information----------
 #ifdef t
 #define CLOUDIP 		"localhost"
 #define CLOUDSERVERPORT "5005"
@@ -33,9 +33,6 @@
 #define IP_FOG_N "192.168.x.x"
 #define IP_FOG_M "192.168.x.x"
 #endif
-
-//
-
 
 #ifdef G
 #define CLOUDIP 		"192.168.2.2"
@@ -82,6 +79,7 @@
 #endif
 
 //-----Modify Packet parameters----
+//B and C are not enable now because they were giving me too much trouble and I wanted to finish fast.
 
 #define PACKETPERIOD_A 4000000
 #define PACKETPERIOD_B 4000000
@@ -141,7 +139,7 @@ int PacketGeneration(int *sockfd,struct timeval *TimeA, struct timeval* TimeB, s
 	return 0;
 }
 
-int ForwardPacket(char buf[], int *fd, int *size)
+int ForwardPacket(char buf[], int *fd, int *size, int src)
 {
 	DEBUG_PRINTF("ForwardPacket: Start\n");
 	timeval now;
@@ -151,9 +149,11 @@ int ForwardPacket(char buf[], int *fd, int *size)
 	int numbytes;
 	if((numbytes=send(*fd,buf,*size,0))==-1)
 		DEBUG_PRINTF("ForwardPacket: Send error\n");
-	DEBUG_PRINTF2("ForwardPacket: Size sent= %d\n",numbytes);
-
+	DEBUG_PRINTF3("ForwardPacket: Size sent to %d= %d\n",numbytes,src);
+	printf("%d %u.%06u\n",now.tv_sec, now.tv_usec);
 	DEBUG_PRINTF("ForwardPacket: End\n");
+
+
 	return 0;
 }
 
@@ -531,17 +531,17 @@ int main(void)
 					{
 					case 'A':
 #ifdef FORWARD_NODE
-						ForwardPacket(buf,&fd_list[i],&numbytes);
+						ForwardPacket(buf,&fd_list[i],&numbytes,1);
 #endif
 						break;
-					case 'B':
-	//					ForwardPacket(buf,&fd_list[i],&numbytes);
-						//CaseB(&fd_list[i],buf,&numbytes);
-						break;
-					case 'C':
-		//				ForwardPacket(buf,&fd_list[i],&numbytes);
-						//CaseC(&fd_list[i],buf,&numbytes);
-						break;
+//					case 'B':
+//	//					ForwardPacket(buf,&fd_list[i],&numbytes);
+//						//CaseB(&fd_list[i],buf,&numbytes);
+//						break;
+//					case 'C':
+//		//				ForwardPacket(buf,&fd_list[i],&numbytes);
+//						//CaseC(&fd_list[i],buf,&numbytes);
+//						break;
 					default:
 						DEBUG_PRINTF("Packet from Node doesn't match with the standard cases\n");
 					}
@@ -577,7 +577,8 @@ int main(void)
 					gettimeofday(&CurrentTime,NULL);
 					DEBUG_PRINTF3("Main: CurrentTime = %u.%06u\n",CurrentTime.tv_sec, CurrentTime.tv_usec);
 					elapsed=TimeElapsed(&CurrentTime, &RecvTime);
-					printf("Main: Elapsed : %u us\n", elapsed);
+					//printf("Main: Elapsed : %u us\n", elapsed);
+					printf("3 \t%u.%06u \t%u.%06u \t%llu",CurrentTime.tv_sec, CurrentTime.tv_usec,RecvTime.tv_sec, RecvTime.tv_usec, elapsed);
 
 					break;
 //				case 'B':
@@ -657,7 +658,7 @@ int main(void)
 					switch(buf[0])
 					{
 					case 'A':
-						ForwardPacket(buf,&(fdfog_list[i]),&numbytes);
+						ForwardPacket(buf,&(fdfog_list[i]),&numbytes,2);
 						break;
 					default:
 						DEBUG_PRINTF("Main: Fog connections: Packet doesn't match with the standard cases\n");
@@ -694,7 +695,8 @@ int main(void)
 						gettimeofday(&CurrentTime,NULL);
 						DEBUG_PRINTF3("Main: CurrentTime = %u.%06u\n",CurrentTime.tv_sec, CurrentTime.tv_usec);
 						elapsed=TimeElapsed(&CurrentTime, &RecvTime);
-			//			printf("Main: Elapsed : %" PRIu64 "us\n", elapsed);
+						//printf("Main: Elapsed : %llu us\n", elapsed);
+						printf("2 %u.%06u \t%u.%06u \t%llu",CurrentTime.tv_sec, CurrentTime.tv_usec,RecvTime.tv_sec, RecvTime.tv_usec, elapsed);
 
 					}
 				}
@@ -719,9 +721,8 @@ int main(void)
 #endif
 
 #ifdef CLOUD
-//			PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
+			PacketGeneration(&Cloudfd,&TimeA,&TimeB,&TimeC);
 #endif
-
 
 #ifdef FOG
 			if (sendtofog && (fdfogclient_list.size()>1)){
@@ -732,7 +733,7 @@ int main(void)
 			}
 #endif
 
-	}
+	} //End of while
 
 	return 0;
 }

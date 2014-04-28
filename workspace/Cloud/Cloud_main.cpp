@@ -259,9 +259,8 @@ int ForwardPacket(char buf[], int *fd, int *size)
 	DEBUG_PRINTF("ForwardPacket: Start\n");
 	timeval now;
 	memcpy(&now,buf+1,sizeof(now));
-	printf("time = %u.%06u\n",now.tv_sec, now.tv_usec);
-
-	if(send(*fd,buf,*size,0)==-1)
+	printf("%u.%06u\n",now.tv_sec, now.tv_usec);
+		if(send(*fd,buf,*size,0)==-1)
 		DEBUG_PRINTF("ForwardPacket: Send error\n");
 	DEBUG_PRINTF("ForwardPacket: End\n");
 	return 0;
@@ -343,7 +342,7 @@ int main(void)
 			fd_list.push_back(new_fd);
 
 			inet_ntop(their_addr.ss_family,	get_in_addr((struct sockaddr *)&their_addr),s, sizeof s);
-			printf("server: got connection from %s\n", s);
+			DEBUG_PRINTF2("server: got connection from %s\n", s);
 
 			for (i=0;i<fd_list.size();i++){
 				DEBUG_PRINTF3("Socket %d: %d\n",i,fd_list[i]);

@@ -1,30 +1,33 @@
-00:15:10 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
+01:34:33 **** Incremental Build of configuration Debug_with_Cross GCC for project ECE640 ****
 make all 
 Building file: ../fog.cpp
 Invoking: Cross G++ Compiler
 g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"fog.d" -MT"fog.d" -o "fog.o" "../fog.cpp"
-../fog.cpp: In function ‘int ForwardPacket(char*, int*, int*)’:
-../fog.cpp:149:2: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
-../fog.cpp:149:2: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp: In function ‘int ForwardPacket(char*, int*, int*, int)’:
+../fog.cpp:147:2: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:147:2: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:153:47: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:153:47: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:153:47: warning: format ‘%u’ expects a matching ‘unsigned int’ argument [-Wformat]
 ../fog.cpp: In function ‘int SelectFogs(int*, char*, int*)’:
 ../fog.cpp:224:30: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
 ../fog.cpp: In function ‘int main()’:
-../fog.cpp:575:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
-../fog.cpp:575:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
-../fog.cpp:577:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
-../fog.cpp:577:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
-../fog.cpp:579:47: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘uint64_t {aka long long unsigned int}’ [-Wformat]
-../fog.cpp:603:33: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp:625:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp:631:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp:668:36: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../fog.cpp:692:7: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
-../fog.cpp:692:7: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
-../fog.cpp:694:7: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
-../fog.cpp:694:7: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
-../fog.cpp:727:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:506:28: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:576:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:576:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:578:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:578:6: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:580:47: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘uint64_t {aka long long unsigned int}’ [-Wformat]
+../fog.cpp:604:33: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:626:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:632:31: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:669:36: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../fog.cpp:693:7: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:693:7: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:695:7: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 2 has type ‘__time_t {aka long int}’ [-Wformat]
+../fog.cpp:695:7: warning: format ‘%u’ expects argument of type ‘unsigned int’, but argument 3 has type ‘__suseconds_t {aka long int}’ [-Wformat]
+../fog.cpp:728:38: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
 ../fog.cpp:389:30: warning: unused variable ‘new_fd’ [-Wunused-variable]
-../fog.cpp:391:7: warning: unused variable ‘port2’ [-Wunused-variable]
 Finished building: ../fog.cpp
  
 Building target: ECE640
@@ -33,5 +36,5 @@ g++  -o "ECE640"  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./fog.
 Finished building target: ECE640
  
 
-00:15:10 Build Finished (took 697ms)
+01:34:34 Build Finished (took 579ms)
 
